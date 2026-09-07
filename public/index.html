@@ -408,7 +408,7 @@ let compareEnabled = true;
    /public en el mismo proyecto de Vercel que expone /api/dashboard — no
    hace falta configurar dominio ni CORS. Si alguna vez separás front y
    back en dos deploys distintos, definí antes de este script:
-   <script>window.GA4_API_BASE = 'https://tu-backend.vercel.app'</script>
+   window.GA4_API_BASE = 'https://tu-backend.vercel.app'  (definido en un tag <script> propio, ANTES de este archivo)
 
    Si el backend no responde, cae automáticamente a los datos simulados
    de fetchGA4Metric() de más abajo, así la demo nunca se rompe.
