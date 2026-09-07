@@ -349,22 +349,21 @@ const PRODUCTS = {
     heroEvent: 'active_users',
     baseActive: 46000,
     kpis: [
-      { label: 'Cuentas nuevas (enrollment)', type: 'count', events: ['enrollment_completed'], base: 3200, format: 'int' },
-      { label: 'Conversión onboarding', type: 'ratio', numerator: ['enrollment_completed'], denominator: ['welcome_view'], base: 0.61, format: 'pct' },
-      { label: 'Transacciones core', type: 'count', events: ['clic_solicitar_prestamo_step4', 'echeq_emitido', 'pap_pdh_confirmado'], base: 210000, format: 'int' },
+      { label: 'Cuentas nuevas (enrollment)', type: 'count', events: ['clic_enrollment_paso3B'], base: 3200, format: 'int' },
+      { label: 'Conversión onboarding', type: 'ratio', numerator: ['clic_enrollment_paso3B'], denominator: ['clic_onboarding_paso1'], base: 0.61, format: 'pct' },
+      { label: 'Transacciones core', type: 'count', events: ['clic_solicitar_prestamo_step4', 'clic_echeq'], base: 210000, format: 'int' },
     ],
     funnel: [
-      { name: 'Welcome', event: 'welcome_view' },
-      { name: 'Registro iniciado', event: 'registro_click' },
-      { name: 'Documento / sexo', event: 'enrollment_doc_view' },
-      { name: 'Continúa enrollment', event: 'enrollment_continue' },
-      { name: 'Enrollment completo', event: 'enrollment_completed' },
+      { name: 'Onboarding paso 1', event: 'clic_onboarding_paso1' },
+      { name: 'Onboarding paso 2', event: 'clic_onboarding_paso2' },
+      { name: 'Onboarding paso 3', event: 'clic_onboarding_paso3' },
+      { name: 'Enrollment completo', event: 'clic_enrollment_paso3B' },
     ],
     features: [
       { name: 'Préstamos', event: 'clic_solicitar_prestamo_step4', icon: '$' },
-      { name: 'ECHEQ', event: 'echeq_emitido', icon: 'E' },
-      { name: 'Firma electrónica', event: 'firma_completada', icon: 'F' },
-      { name: 'PaP / PdH', event: 'pap_pdh_confirmado', icon: 'P' },
+      { name: 'ECHEQ', event: 'clic_echeq', icon: 'E' },
+      { name: 'Pago de servicios', event: 'clic_pago_servicios', icon: 'S' },
+      { name: 'Alta tarjeta de crédito', event: 'clic_habillitar_TC', icon: 'T' },
     ],
   },
   bezza: {
@@ -376,25 +375,25 @@ const PRODUCTS = {
     baseActive: 18500,
     kpis: [
       { label: 'Cuentas nuevas', type: 'count', events: ['account_creation_success'], base: 2100, format: 'int' },
-      { label: 'Conversión onboarding', type: 'ratio', numerator: ['onboarding_kyc_complete'], denominator: ['onboarding_kyc_start'], base: 0.54, format: 'pct' },
+      { label: 'Conversión onboarding', type: 'ratio', numerator: ['onboarding_kyc_complete'], denominator: ['onboarding_dnigender'], base: 0.54, format: 'pct' },
       { label: 'Transacciones core', type: 'count', events: ['transfer_success', 'qr_payment_confirmed'], base: 96000, format: 'int' },
     ],
     funnel: [
       { name: 'Tutorial', event: 'tutorial_start' },
       { name: 'Signup iniciado', event: 'signup_start' },
       { name: 'Signup exitoso', event: 'signup_success' },
-      { name: 'KYC iniciado', event: 'onboarding_kyc_start' },
+      { name: 'KYC iniciado', event: 'onboarding_dnigender' },
       { name: 'KYC completo', event: 'onboarding_kyc_complete' },
     ],
     features: [
       { name: 'Transferencias', event: 'transfer_success', icon: '→' },
       { name: 'Pago con QR', event: 'qr_payment_confirmed', icon: 'Q' },
-      { name: 'Beneficios', event: 'benefit_redeemed', icon: '★' },
-      { name: 'Cuenta remunerada', event: 'yield_account_active', icon: '%' },
+      { name: 'Beneficios', event: 'benefits_list_view', icon: '★' },
+      { name: 'Cuenta remunerada', event: 'rewarded_account_modal_view', icon: '%' },
     ],
   }
 };
-
+  
 let currentProduct = 'bancor';
 let compareEnabled = true;
 
