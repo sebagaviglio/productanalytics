@@ -17,7 +17,7 @@ async function getActiveUsersSeries(propertyId, ranges) {
       { startDate: ranges.current.start, endDate: ranges.current.end },
       { startDate: ranges.previous.start, endDate: ranges.previous.end },
     ],
-    dimensions: [{ name: 'dateRange' }, { name: 'date' }],
+    dimensions: [{ name: 'date' }],
     metrics: [{ name: 'activeUsers' }],
     limit: 100000,
   });
@@ -37,7 +37,7 @@ async function getEventSeries(propertyId, eventNames, ranges) {
       { startDate: ranges.current.start, endDate: ranges.current.end },
       { startDate: ranges.previous.start, endDate: ranges.previous.end },
     ],
-    dimensions: [{ name: 'dateRange' }, { name: 'date' }, { name: 'eventName' }],
+    dimensions: [{ name: 'date' }, { name: 'eventName' }],
     metrics: [{ name: 'eventCount' }],
     dimensionFilter: {
       filter: {
