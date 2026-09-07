@@ -51,12 +51,11 @@ module.exports = {
 
     // Nivel 2 — engagement por feature
     features: [
-      { name: 'Préstamos', event: 'clic_solicitar_prestamo_step4' }, // confirmado
-      { name: 'ECHEQ', event: 'echeq_emitido' }, // CONFIRMAR
-      { name: 'Firma electrónica', event: 'firma_completada' }, // CONFIRMAR
-      { name: 'PaP / PdH', event: 'pap_pdh_confirmado' }, // CONFIRMAR
+      { name: 'Préstamos', event: 'clic_solicitar_prestamo_step4' }, // confirmado (hoja "Eventos Bancor - PROD")
+      { name: 'ECHEQ', event: 'clic_echeq' }, // CONFIRMAR: es un click de acceso a la sección, no una emisión confirmada
+      { name: 'Pago de servicios', event: 'clic_pago_servicios' }, // reemplaza a "Firma electrónica" (no implementada) — proxy de conversión, no hay evento de "pago exitoso" separado del click de acción
+      { name: 'Alta tarjeta de crédito', event: 'clic_habillitar_TC' }, // reemplaza a "PaP / PdH" (no implementada) — proxy, no confirma éxito real de la alta
     ],
-  },
 
   bezza: {
     label: 'Bezza',
