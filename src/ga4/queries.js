@@ -81,3 +81,23 @@ async function getEventSeries(propertyId, eventNames, ranges) {
 }
 
 function shapeSingleSeries(response, ranges) {
+  const currentDates = dateListYYYYMMDD(ranges.current.start, ranges.current.end);
+  const previousDates = dateListYYYYMMDD(ranges.previous.start, ranges.previous.end);
+  const curBucket = {};
+  const prevBucket = {};
+
+  (response.rows || []).forEach((row) => {
+    // Orden real: [date, dateRange]
+    const date = row.dimensionValues[0].value;
+    const rangeIdx = row.dimensionValues[1].value === 'date_range_0' ? 0 : 1;
+    const value = Number(row.metricValues[0].value || 0);
+    (rangeIdx === 0 ? curBucket : prevBucket)[date] = value;
+  });
+
+  return {
+    current: currentDates.map((d) => curBucket[d] || 0),
+    previous: previousDates.map((d) => prevBucket[d] || 0),
+  };
+}
+
+module.exports = { getActiveUsersSeries, getEventSeries };
