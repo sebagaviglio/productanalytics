@@ -1,0 +1,12 @@
+{
+  "name": "ga4-product-analytics",
+  "version": "1.0.0",
+  "description": "Tablero de product analytics (Bancor / Bezza) sobre GA4 Data API, desplegable en Vercel",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@google-analytics/data": "^4.7.0"
+  }
+}
