@@ -8,12 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --radius-hero: 28px;
-    --radius-card: 18px;
-    --radius-pill: 999px;
-    --font: 'Public Sans', -apple-system, sans-serif;
-  }
+  :root{ --radius-hero: 28px; --radius-card: 18px; --radius-pill: 999px; --font: 'Public Sans', -apple-system, sans-serif; }
 
   body[data-product="bancor"]{
     --bg-0: #061512; --bg-1: #0a201b;
@@ -45,19 +40,31 @@
 
   .wrap{ max-width:1240px; margin:0 auto; padding: 28px 32px 0; }
 
-  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; padding-bottom:26px; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:26px; border-bottom:1px solid var(--border); flex-wrap:wrap; }
   .brand-lockup{ display:flex; align-items:center; gap:12px; }
   .brand-mark{ width:36px; height:36px; border-radius:11px; background: linear-gradient(135deg, var(--orb-a), var(--orb-b)); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#0a0a0a; }
   .brand-text .t1{ font-size:15px; font-weight:600; letter-spacing:.1px; }
   .brand-text .t2{ font-size:12.5px; color:var(--text-1); }
 
+  .topbar-right{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .switcher{ display:flex; background:var(--glass); border:1px solid var(--border); border-radius: var(--radius-pill); padding:4px; gap:4px; }
   .switcher button{ border:none; background:transparent; color:var(--text-1); font-family:var(--font); font-size:13.5px; font-weight:500; padding:9px 18px; border-radius:var(--radius-pill); cursor:pointer; transition: all .25s ease; }
   .switcher button.active{ background: var(--text-0); color:#0a0a0a; }
 
-  .period-block{ display:flex; align-items:center; gap:10px; }
-  .period-pill{ display:flex; align-items:center; gap:8px; background:var(--glass); border:1px solid var(--border); border-radius: var(--radius-pill); padding:8px 16px; font-size:13px; color:var(--text-1); }
-  .period-pill b{ color:var(--text-0); font-weight:500; }
+  .period-select{
+    background:var(--glass); border:1px solid var(--border); border-radius: var(--radius-pill);
+    padding:9px 16px; font-size:13px; color:var(--text-0); font-family:var(--font); cursor:pointer;
+  }
+  .period-select:focus{ outline:1px solid var(--border-strong); }
+
+  .refresh-btn{
+    display:flex; align-items:center; gap:7px; background:var(--glass); border:1px solid var(--border);
+    border-radius: var(--radius-pill); padding:9px 16px; font-size:13px; color:var(--text-0);
+    font-family:var(--font); cursor:pointer; transition: all .2s ease;
+  }
+  .refresh-btn:hover{ background:var(--glass-strong); }
+  .refresh-btn.spinning svg{ animation: spin 0.8s linear infinite; }
+  @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 
   .section-block{ margin-top: 40px; }
   .section-title{ font-size:19px; font-weight:600; margin-bottom:2px; }
@@ -67,7 +74,7 @@
   .hero-card{ position:relative; overflow:hidden; background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-hero); padding:28px 30px; display:flex; flex-direction:column; justify-content:space-between; min-height: 190px; }
   .hero-card .orb{ position:absolute; width:280px; height:280px; border-radius:50%; right:-100px; top:-100px; filter: blur(10px); background: conic-gradient(from 180deg, var(--orb-a), var(--orb-b), var(--orb-a)); opacity:.3; }
   .hero-top{ position:relative; z-index:1; display:flex; justify-content:space-between; align-items:flex-start;}
-  .hero-label{ font-size:13.5px; color:var(--text-1); font-weight:500; }
+  .hero-label{ font-size:13.5px; color:var(--text-1); font-weight:500; display:flex; align-items:center; }
   .delta-chip{ font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:var(--radius-pill); display:flex; align-items:center; gap:4px; white-space:nowrap; }
   .delta-chip.up{ background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); }
   .delta-chip.down{ background: color-mix(in srgb, var(--danger) 20%, transparent); color: var(--danger); }
@@ -79,13 +86,27 @@
   .card-grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
   .kpi-card{ background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-card); padding:20px 22px; display:flex; flex-direction:column; justify-content:space-between; min-height: 168px; }
   .kpi-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
-  .kpi-label{ font-size:13px; color:var(--text-1); font-weight:500; line-height:1.3; }
+  .kpi-label{ font-size:13px; color:var(--text-1); font-weight:500; line-height:1.3; display:flex; align-items:center; }
   .kpi-number{ font-size:30px; font-weight:700; letter-spacing:-.5px; margin-top:14px; }
   .kpi-note{ font-size:11px; color:var(--text-2); margin-top:4px; }
   .kpi-spark{ width:100%; height:30px; margin-top:10px; }
+  .kpi-unavailable{ font-size:13px; color:var(--text-2); margin-top: 18px; line-height:1.5; }
+  .kpi-unavailable b{ color: var(--danger); }
+
+  /* Tooltip de info */
+  .info-icon{ cursor:help; opacity:0.65; font-size:10.5px; border:1px solid var(--border-strong); border-radius:50%; width:15px; height:15px; display:inline-flex; align-items:center; justify-content:center; margin-left:6px; position:relative; flex-shrink:0; }
+  .info-icon:hover{ opacity:1; }
+  .info-icon .tooltip-box{
+    display:none; position:absolute; bottom:22px; left:50%; transform:translateX(-50%); width:240px;
+    background:#0a0a0a; border:1px solid var(--border-strong); border-radius:10px; padding:11px 13px;
+    font-size:11px; line-height:1.55; color:var(--text-0); z-index:20; box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    font-weight:400; text-align:left; white-space:normal;
+  }
+  .info-icon .tooltip-box code{ background:rgba(255,255,255,0.08); padding:1px 4px; border-radius:4px; font-size:10.5px; }
+  .info-icon:hover .tooltip-box{ display:block; }
 
   .channel-card{ background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-card); padding:20px 22px; }
-  .channel-title{ font-size:13px; color:var(--text-1); font-weight:500; margin-bottom:14px; }
+  .channel-title{ font-size:13px; color:var(--text-1); font-weight:500; margin-bottom:14px; display:flex; align-items:center; }
   .channel-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
   .channel-name{ font-size:12px; color:var(--text-0); width:110px; flex-shrink:0; text-transform:capitalize; }
   .channel-bar-bg{ flex:1; height:8px; border-radius:5px; background:rgba(255,255,255,0.05); overflow:hidden; }
@@ -100,15 +121,15 @@
   .legend{ display:flex; gap:16px; font-size:12px; color:var(--text-1); }
   .legend span{ display:flex; align-items:center; gap:6px; }
   .legend i{ width:9px; height:9px; border-radius:2px; display:inline-block; }
-  .funnel-row{ display:flex; align-items:stretch; gap:10px; }
+  .funnel-row{ display:flex; align-items:stretch; gap:14px; }
   .funnel-step{ flex:1; display:flex; flex-direction:column; gap:8px; }
-  .funnel-bar-wrap{ height:130px; display:flex; align-items:flex-end; background:rgba(255,255,255,0.03); border-radius:10px; position:relative; overflow:hidden; padding:0 8px; gap:6px;}
-  .bar{ flex:1; border-radius:6px 6px 0 0; transition: height .6s ease; }
+  .funnel-bar-wrap{ height:150px; display:flex; align-items:flex-end; background:rgba(255,255,255,0.03); border-radius:10px; position:relative; overflow:hidden; padding:10px 10px 0; gap:10px;}
+  .bar-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:6px; }
+  .bar-value{ font-size:10.5px; color:var(--text-1); font-weight:600; white-space:nowrap; }
+  .bar{ width:100%; border-radius:6px 6px 0 0; transition: height .6s ease; }
   .bar.current{ background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 55%, transparent)); }
   .bar.previous{ background: var(--glass-strong); border:1px solid var(--border-strong); border-bottom:none; }
-  .funnel-step-name{ font-size:12.5px; color:var(--text-0); font-weight:500; margin-top:2px;}
-  .funnel-step-value{ font-size:11.5px; color:var(--text-2); }
-  .funnel-drop{ font-size:11px; color:var(--danger); font-weight:500; }
+  .funnel-step-name{ font-size:12.5px; color:var(--text-0); font-weight:500; margin-top:2px; display:flex; align-items:center; }
 
   .unavailable-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; margin-top:16px; }
   .unavailable-card{ background: repeating-linear-gradient(135deg, var(--glass), var(--glass) 10px, rgba(255,255,255,0.015) 10px, rgba(255,255,255,0.015) 20px); border:1px dashed var(--border-strong); border-radius: var(--radius-card); padding:20px 22px; }
@@ -135,12 +156,21 @@
         <div class="t2">App móvil · GA4 Data API</div>
       </div>
     </div>
-    <div class="switcher">
-      <button class="active" data-product="bancor">Bancor</button>
-      <button data-product="bezza">Bezza</button>
-    </div>
-    <div class="period-block">
-      <div class="period-pill">Período: <b>&nbsp;últimos 3 meses</b></div>
+    <div class="topbar-right">
+      <div class="switcher">
+        <button class="active" data-product="bancor">Bancor</button>
+        <button data-product="bezza">Bezza</button>
+      </div>
+      <select class="period-select" id="periodSelect">
+        <option value="30">Últimos 30 días</option>
+        <option value="90" selected>Últimos 90 días</option>
+        <option value="180">Últimos 180 días</option>
+        <option value="365">Últimos 365 días</option>
+      </select>
+      <button class="refresh-btn" id="refreshBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 4v6h-6"/></svg>
+        Actualizar
+      </button>
     </div>
   </div>
 
@@ -149,11 +179,13 @@
     <div class="hero-card">
       <div class="orb"></div>
       <div class="hero-top">
-        <div class="hero-label" id="heroLabel">Usuarios activos (app)</div>
+        <div class="hero-label">Usuarios activos (app)<span class="info-icon">ⓘ<span class="tooltip-box" id="tipHero">Promedio de usuarios activos por día. Métrica nativa de GA4 (<code>activeUsers</code>) — no depende de ningún evento custom nuestro.</span></span></div>
         <div class="delta-chip up" id="heroDelta">+0%</div>
       </div>
-      <div class="hero-number" id="heroNumber">0<span>usuarios / día</span></div>
-      <svg class="hero-spark" id="heroSpark" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>
+      <div id="heroBody">
+        <div class="hero-number" id="heroNumber">0<span>usuarios / día</span></div>
+        <svg class="hero-spark" id="heroSpark" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>
+      </div>
     </div>
   </div>
 
@@ -218,13 +250,21 @@
 
 <script>
 /* ============================================================
-   1) CONFIG POR PRODUCTO — refleja src/config/products.js del backend
+   1) CONFIG POR PRODUCTO — refleja src/config/products.js del backend.
+   baseActive de Bancor ajustado a la magnitud real confirmada contra GA4
+   (~400k-700k usuarios activos/día), antes tenía un valor de placeholder
+   mucho más chico que hacía que el fallback a mock pareciera "roto".
    ============================================================ */
 const PRODUCTS = {
   bancor: {
     label: 'Bancor', mark: 'B', title: 'Bancor · Product analytics',
-    heroEvent: 'active_users', baseActive: 46000,
-    acquisition: { registrationEvent: 'clic_enrollment_paso3B', kyc: { start: 'clic_onboarding_paso1', complete: 'clic_onboarding_paso3' } },
+    heroEvent: 'active_users', baseActive: 550000,
+    acquisition: {
+      registrationEvent: 'clic_enrollment_paso3B',
+      registrationTooltip: 'Altas de cuenta (evento <code>clic_enrollment_paso3B</code>) sobre primeras aperturas de la app (evento <code>first_open</code>).',
+      kyc: { start: 'clic_onboarding_paso1', complete: 'clic_onboarding_paso3' },
+      kycTooltip: 'Onboarding de datos completado (<code>clic_onboarding_paso3</code>) sobre iniciado (<code>clic_onboarding_paso1</code>). Bancor no tiene un evento de "KYC" explícito, se usa el onboarding como proxy — CONFIRMAR con dev.',
+    },
     monetizationFunnel: [
       { name: 'Cuenta creada', event: 'clic_enrollment_paso3B' },
       { name: 'KYC verificado', event: 'clic_onboarding_paso3' },
@@ -233,8 +273,13 @@ const PRODUCTS = {
   },
   bezza: {
     label: 'Bezza', mark: 'b', title: 'Bezza · Product analytics',
-    heroEvent: 'active_users', baseActive: 18500,
-    acquisition: { registrationEvent: 'account_creation_success', kyc: { start: 'onboarding_dnigender', complete: 'onboarding_kyc_complete' } },
+    heroEvent: 'active_users', baseActive: 22000,
+    acquisition: {
+      registrationEvent: 'account_creation_success',
+      registrationTooltip: 'Altas de cuenta (evento <code>account_creation_success</code>) sobre primeras aperturas de la app (evento <code>first_open</code>).',
+      kyc: { start: 'onboarding_dnigender', complete: 'onboarding_kyc_complete' },
+      kycTooltip: 'KYC completado (<code>onboarding_kyc_complete</code>) sobre iniciado (<code>onboarding_dnigender</code>, primer paso de datos — <code>onboarding_kyc_start</code> no existe en el export real).',
+    },
     monetizationFunnel: [
       { name: 'Cuenta creada', event: 'account_creation_success' },
       { name: 'KYC verificado', event: 'onboarding_kyc_complete' },
@@ -244,45 +289,68 @@ const PRODUCTS = {
 };
 
 let currentProduct = 'bancor';
+let currentPeriodDays = 90;
 
 /* ============================================================
-   2) CONEXIÓN AL BACKEND — ruta relativa (mismo proyecto Vercel)
+   2) CONEXIÓN AL BACKEND
    ============================================================ */
 const API_BASE = window.GA4_API_BASE || '';
-const liveDataCache = {};
+const liveDataCache = {}; // clave: `${product}:${periodDays}`
 
-async function fetchLiveData(productKey){
-  if(liveDataCache[productKey] !== undefined) return liveDataCache[productKey];
+async function fetchLiveData(productKey, periodDays, forceRefresh){
+  const cacheKey = `${productKey}:${periodDays}`;
+  if(!forceRefresh && liveDataCache[cacheKey] !== undefined) return liveDataCache[cacheKey];
   try{
-    const res = await fetch(`${API_BASE}/api/dashboard?product=${productKey}`);
+    const qs = new URLSearchParams({ product: productKey, months: periodDays });
+    if(forceRefresh) qs.set('refresh', 'true');
+    const res = await fetch(`${API_BASE}/api/dashboard?${qs.toString()}`);
     if(!res.ok) throw new Error(`status ${res.status}`);
     const json = await res.json();
-    liveDataCache[productKey] = json;
+    liveDataCache[cacheKey] = json;
     return json;
   }catch(e){
     console.warn(`GA4 backend no disponible (${e.message}), usando datos simulados.`);
-    liveDataCache[productKey] = null;
+    liveDataCache[cacheKey] = null;
     return null;
   }
 }
 
+// live === null           -> backend entero no responde: modo demo offline (mock)
+// live.events[x] existe   -> dato real
+// live.events[x] ausente  -> el evento no está instrumentado (placeholder), 0 real es válido
 function getSeries(live, eventName, base, seed){
-  if(live && live.events && live.events[eventName]){ return live.events[eventName]; }
-  return fetchGA4Metric(eventName, base, seed);
+  if(live === null) return fetchGA4Metric(eventName, base, seed);
+  if(live && live.events && live.events[eventName]) return live.events[eventName];
+  return { current: new Array(90).fill(0), previous: new Array(90).fill(0) };
 }
+
+// Para las métricas nativas (engagement, activeUsers, channels): si el
+// backend respondió pero ESA query puntual falló server-side, no la
+// disfrazamos con un mock parecido — devolvemos null y la card lo muestra
+// explícitamente, para que un fallo real no se confunda con "está en cero".
 function getEngagementMetric(live, metricName, base, seed){
-  if(live && live.engagement && live.engagement[metricName]){ return live.engagement[metricName]; }
-  return fetchGA4Metric('engagement_'+metricName, base, seed);
+  if(live === null) return metricName === 'engagementRate' ? mockRatioSeries('eng_'+metricName, base, seed) : mockDailyMetric('eng_'+metricName, base, seed);
+  if(live.engagement && live.engagement[metricName]) return live.engagement[metricName];
+  return null;
+}
+
+// El hero usa la query dedicada de activeUsers (live.activeUsers), separada
+// de las métricas de engagement (live.engagement.*) aunque ambas consulten
+// el mismo activeUsers de GA4 — son dos llamadas distintas en el backend.
+function getActiveUsersMetric(live, base, seed){
+  if(live === null) return mockDailyMetric('active_users', base, seed);
+  if(live.activeUsers) return live.activeUsers;
+  return null;
 }
 
 /* ============================================================
-   3) MOCK — fallback si el backend no responde
+   3) MOCK — solo para "modo demo offline" (backend inalcanzable)
    ============================================================ */
-function seededRandom(seed){
-  let s = seed % 2147483647; if (s <= 0) s += 2147483646;
-  return function(){ s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
-}
+function seededRandom(seed){ let s=seed%2147483647; if(s<=0) s+=2147483646; return function(){ s=(s*16807)%2147483647; return (s-1)/2147483646; }; }
 function hashCode(str){ let h=0; for(let i=0;i<str.length;i++){ h=((h<<5)-h)+str.charCodeAt(i); h|=0; } return Math.abs(h); }
+
+// Para conteos de EVENTOS (funnel, registro, kyc, first_open): baseValue
+// representa un total aproximado del período, se reparte en días.
 function fetchGA4Metric(eventName, baseValue, seedOffset){
   const rnd = seededRandom(hashCode(eventName) + seedOffset);
   const days = 180; const series = []; const trend = 1 + (rnd() * 0.35);
@@ -291,6 +359,25 @@ function fetchGA4Metric(eventName, baseValue, seedOffset){
     const progress = i/days; const growth = 1 + (trend-1)*progress; const noise = 0.9 + rnd()*0.2;
     series.push(Math.max(0, Math.round(baseValue*growth*weekendDrop*noise/30)));
   }
+  return { previous: series.slice(0,90), current: series.slice(90,180) };
+}
+// Para métricas que YA son "por día" (activeUsers, duración, DAU/MAU): NO
+// se dividen por 30 — ese fue el bug que hacía ver 1.8k en vez de ~500k.
+function mockDailyMetric(seedKey, dailyBase, seedOffset){
+  const rnd = seededRandom(hashCode(seedKey) + seedOffset);
+  const days = 180; const series = []; const trend = 1 + (rnd() * 0.25);
+  for(let i=0;i<days;i++){
+    const weekday = i % 7; const weekendDrop = (weekday===5||weekday===6) ? 0.85 : 1;
+    const progress = i/days; const growth = 1 + (trend-1)*progress; const noise = 0.92 + rnd()*0.16;
+    series.push(Math.max(0, Math.round(dailyBase*growth*weekendDrop*noise)));
+  }
+  return { previous: series.slice(0,90), current: series.slice(90,180) };
+}
+// Para ratios 0-1 (engagementRate)
+function mockRatioSeries(seedKey, baseRatio, seedOffset){
+  const rnd = seededRandom(hashCode(seedKey) + seedOffset);
+  const days = 180; const series = [];
+  for(let i=0;i<days;i++){ const noise = 0.85 + rnd()*0.3; series.push(Math.min(0.97, Math.max(0.01, baseRatio*noise))); }
   return { previous: series.slice(0,90), current: series.slice(90,180) };
 }
 function mockChannels(seed){
@@ -320,97 +407,136 @@ function renderSparkSVG(svgEl, values, colorVar, filled){
   svgEl.innerHTML = `<defs><linearGradient id="grad-${svgEl.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(${colorVar})" stop-opacity="0.35"/><stop offset="100%" stop-color="var(${colorVar})" stop-opacity="0"/></linearGradient></defs>${filled?`<path d="${areaPath}" fill="url(#grad-${svgEl.id})" stroke="none"/>`:''}<path d="${path}" fill="none" stroke="var(${colorVar})" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
 }
 
-function kpiCardHTML(label, valueStr, deltaPct, note){
+function tooltipIcon(id, html){
+  return `<span class="info-icon">ⓘ<span class="tooltip-box" id="${id}">${html}</span></span>`;
+}
+function kpiCardHTML(label, tooltipHtml, valueStr, deltaPct, note){
   const dirClass = deltaPct===null ? 'neutral' : (deltaPct>=0?'up':'down');
   const deltaText = deltaPct===null ? 'sin comparación' : `${deltaPct>=0?'+':''}${deltaPct.toFixed(1)}% vs. anterior`;
   return `
     <div class="kpi-top">
-      <div class="kpi-label">${label}</div>
+      <div class="kpi-label">${label}${tooltipIcon('tip_'+Math.random().toString(36).slice(2), tooltipHtml)}</div>
       <div class="delta-chip ${dirClass}">${deltaText}</div>
     </div>
     <div class="kpi-number">${valueStr}</div>
     ${note ? `<div class="kpi-note">${note}</div>` : ''}
   `;
 }
+function kpiUnavailableHTML(label, tooltipHtml, errorMsg){
+  return `
+    <div class="kpi-top">
+      <div class="kpi-label">${label}${tooltipIcon('tip_'+Math.random().toString(36).slice(2), tooltipHtml)}</div>
+      <div class="delta-chip neutral">sin datos</div>
+    </div>
+    <div class="kpi-unavailable"><b>Falló la consulta a GA4</b> para esta métrica.${errorMsg ? ' Detalle: '+errorMsg : ''}</div>
+  `;
+}
 
 /* ============================================================
    5) RENDER
    ============================================================ */
-async function render(){
+async function render(forceRefresh){
   const cfg = PRODUCTS[currentProduct];
   document.body.setAttribute('data-product', currentProduct);
   document.getElementById('brandMark').textContent = cfg.mark;
   document.getElementById('brandTitle').textContent = cfg.title;
   document.getElementById('updatedAt').textContent = 'Conectando con GA4…';
 
-  const live = await fetchLiveData(currentProduct);
+  const live = await fetchLiveData(currentProduct, currentPeriodDays, forceRefresh);
 
   // ---- HERO: usuarios activos ----
-  const heroData = (live && live.activeUsers) ? live.activeUsers : fetchGA4Metric(cfg.heroEvent, cfg.baseActive, 1);
-  const heroCurAvg = avg(heroData.current), heroPrevAvg = avg(heroData.previous);
-  const heroDelta = calcDelta(heroCurAvg, heroPrevAvg);
-  document.getElementById('heroNumber').innerHTML = formatNumber(heroCurAvg) + '<span>usuarios / día</span>';
-  const heroChip = document.getElementById('heroDelta');
-  heroChip.textContent = (heroDelta>=0?'+':'') + heroDelta.toFixed(1) + '% vs. período anterior';
-  heroChip.className = 'delta-chip ' + (heroDelta>=0?'up':'down');
-  renderSparkSVG(document.getElementById('heroSpark'), heroData.current, '--accent', true);
+  const heroData = getActiveUsersMetric(live, cfg.baseActive, 1);
+  if(heroData === null){
+    document.getElementById('heroBody').innerHTML = `<div class="kpi-unavailable"><b>Falló la consulta a GA4</b> para usuarios activos.${live.errors && live.errors.activeUsers ? ' Detalle: '+live.errors.activeUsers : ''}</div>`;
+    document.getElementById('heroDelta').className = 'delta-chip neutral';
+    document.getElementById('heroDelta').textContent = 'sin datos';
+  } else {
+    document.getElementById('heroBody').innerHTML = `<div class="hero-number" id="heroNumber">0<span>usuarios / día</span></div><svg class="hero-spark" id="heroSpark" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+    const heroCurAvg = avg(heroData.current), heroPrevAvg = avg(heroData.previous);
+    const heroDelta = calcDelta(heroCurAvg, heroPrevAvg);
+    document.getElementById('heroNumber').innerHTML = formatNumber(heroCurAvg) + '<span>usuarios / día</span>';
+    const heroChip = document.getElementById('heroDelta');
+    heroChip.textContent = (heroDelta>=0?'+':'') + heroDelta.toFixed(1) + '% vs. período anterior';
+    heroChip.className = 'delta-chip ' + (heroDelta>=0?'up':'down');
+    renderSparkSVG(document.getElementById('heroSpark'), heroData.current, '--accent', true);
+  }
 
   // ---- ADQUISICIÓN: Tasa de conversión de registro ----
-  const regData = getSeries(live, cfg.acquisition.registrationEvent, cfg.baseActive*0.08, 10);
-  const firstOpenData = getSeries(live, 'first_open', cfg.baseActive*0.6, 11);
+  const regData = getSeries(live, cfg.acquisition.registrationEvent, cfg.baseActive*2.5, 10);
+  const firstOpenData = getSeries(live, 'first_open', cfg.baseActive*18, 11);
   const regCur = sum(regData.current)/(sum(firstOpenData.current)||1);
   const regPrev = sum(regData.previous)/(sum(firstOpenData.previous)||1);
   const regSeries = regData.current.map((v,i)=> firstOpenData.current[i] ? v/firstOpenData.current[i] : 0);
-  document.getElementById('cardRegConversion').innerHTML = kpiCardHTML('Tasa de conversión de registro', formatPct(regCur), calcDelta(regCur,regPrev), 'altas / primeras aperturas') + `<svg class="kpi-spark" id="sparkReg" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+  document.getElementById('cardRegConversion').innerHTML = kpiCardHTML('Tasa de conversión de registro', cfg.acquisition.registrationTooltip, formatPct(regCur), calcDelta(regCur,regPrev)) + `<svg class="kpi-spark" id="sparkReg" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
   renderSparkSVG(document.getElementById('sparkReg'), regSeries, '--accent', false);
 
   // ---- ADQUISICIÓN: Tasa de completitud KYC ----
-  const kycStartData = getSeries(live, cfg.acquisition.kyc.start, cfg.baseActive*0.3, 12);
-  const kycCompleteData = getSeries(live, cfg.acquisition.kyc.complete, cfg.baseActive*0.18, 13);
+  const kycStartData = getSeries(live, cfg.acquisition.kyc.start, cfg.baseActive*9, 12);
+  const kycCompleteData = getSeries(live, cfg.acquisition.kyc.complete, cfg.baseActive*5, 13);
   const kycCur = sum(kycCompleteData.current)/(sum(kycStartData.current)||1);
   const kycPrev = sum(kycCompleteData.previous)/(sum(kycStartData.previous)||1);
   const kycSeries = kycCompleteData.current.map((v,i)=> kycStartData.current[i] ? v/kycStartData.current[i] : 0);
-  document.getElementById('cardKycCompletion').innerHTML = kpiCardHTML('Tasa de completitud de KYC', formatPct(kycCur), calcDelta(kycCur,kycPrev), 'validación de identidad completa / iniciada') + `<svg class="kpi-spark" id="sparkKyc" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+  document.getElementById('cardKycCompletion').innerHTML = kpiCardHTML('Tasa de completitud de KYC', cfg.acquisition.kycTooltip, formatPct(kycCur), calcDelta(kycCur,kycPrev)) + `<svg class="kpi-spark" id="sparkKyc" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
   renderSparkSVG(document.getElementById('sparkKyc'), kycSeries, '--tertiary', false);
 
   // ---- ADQUISICIÓN: usuarios nuevos por canal ----
-  const channels = (live && live.channels && live.channels.length) ? live.channels : mockChannels(20);
-  const maxChannel = Math.max(...channels.map(c=>c.newUsers), 1);
-  document.getElementById('cardChannels').innerHTML = `
-    <div class="channel-title">Usuarios nuevos por canal</div>
-    ${channels.slice(0,5).map(c => `
-      <div class="channel-row">
-        <div class="channel-name">${c.channel}</div>
-        <div class="channel-bar-bg"><div class="channel-bar-fill" style="width:${(c.newUsers/maxChannel*100).toFixed(0)}%"></div></div>
-        <div class="channel-value">${formatNumber(c.newUsers)}</div>
-      </div>
-    `).join('')}
-    <div class="channel-note">No incluye costo — requiere vincular Google Ads a la property</div>
-  `;
+  const channelsData = (live === null) ? mockChannels(20) : (live.channels || null);
+  const channelTip = 'Usuarios nuevos por canal de adquisición (dimensión <code>sessionDefaultChannelGroup</code>, métrica <code>newUsers</code>). No incluye costo en $ — eso requiere vincular Google Ads a la property, algo que no podemos confirmar desde acá.';
+  if(channelsData === null){
+    document.getElementById('cardChannels').innerHTML = `<div class="channel-title">Usuarios nuevos por canal${tooltipIcon('tipCh', channelTip)}</div><div class="kpi-unavailable"><b>Falló la consulta a GA4</b> para canales.${live.errors && live.errors.channels ? ' Detalle: '+live.errors.channels : ''}</div>`;
+  } else {
+    const maxChannel = Math.max(...channelsData.map(c=>c.newUsers), 1);
+    document.getElementById('cardChannels').innerHTML = `
+      <div class="channel-title">Usuarios nuevos por canal${tooltipIcon('tipCh', channelTip)}</div>
+      ${channelsData.slice(0,5).map(c => `
+        <div class="channel-row">
+          <div class="channel-name">${c.channel}</div>
+          <div class="channel-bar-bg"><div class="channel-bar-fill" style="width:${(c.newUsers/maxChannel*100).toFixed(0)}%"></div></div>
+          <div class="channel-value">${formatNumber(c.newUsers)}</div>
+        </div>
+      `).join('')}
+      <div class="channel-note">No incluye costo — requiere vincular Google Ads a la property</div>
+    `;
+  }
 
   // ---- ENGAGEMENT: Tasa de interacción ----
+  const engRateTip = '% de sesiones que duraron 10s+, tuvieron 2+ pantallas o dispararon un evento clave. Métrica nativa de GA4 (<code>engagementRate</code>), no depende de eventos custom.';
   const engRate = getEngagementMetric(live, 'engagementRate', 0.55, 30);
-  const engRateCur = avg(engRate.current), engRatePrev = avg(engRate.previous);
-  document.getElementById('cardEngagementRate').innerHTML = kpiCardHTML('Tasa de interacción (Engagement Rate)', formatPct(engRateCur), calcDelta(engRateCur,engRatePrev), 'sesiones de 10s+, 2+ pantallas o evento clave') + `<svg class="kpi-spark" id="sparkEngRate" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
-  renderSparkSVG(document.getElementById('sparkEngRate'), engRate.current, '--accent', false);
+  if(engRate === null){
+    document.getElementById('cardEngagementRate').innerHTML = kpiUnavailableHTML('Tasa de interacción (Engagement Rate)', engRateTip, live.errors && live.errors.engagement);
+  } else {
+    const engRateCur = avg(engRate.current), engRatePrev = avg(engRate.previous);
+    document.getElementById('cardEngagementRate').innerHTML = kpiCardHTML('Tasa de interacción (Engagement Rate)', engRateTip, formatPct(engRateCur), calcDelta(engRateCur,engRatePrev)) + `<svg class="kpi-spark" id="sparkEngRate" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+    renderSparkSVG(document.getElementById('sparkEngRate'), engRate.current, '--accent', false);
+  }
 
   // ---- ENGAGEMENT: Tiempo promedio de interacción ----
+  const avgTimeTip = 'Segundos totales de interacción (<code>userEngagementDuration</code>) divididos por usuarios activos (<code>activeUsers</code>). Ambas son métricas nativas de GA4.';
   const engDuration = getEngagementMetric(live, 'userEngagementDuration', cfg.baseActive*140, 31);
   const engActiveUsers = getEngagementMetric(live, 'activeUsers', cfg.baseActive, 32);
-  const avgTimeCur = sum(engDuration.current)/(sum(engActiveUsers.current)||1);
-  const avgTimePrev = sum(engDuration.previous)/(sum(engActiveUsers.previous)||1);
-  const avgTimeSeries = engDuration.current.map((v,i)=> engActiveUsers.current[i] ? v/engActiveUsers.current[i] : 0);
-  document.getElementById('cardAvgEngTime').innerHTML = kpiCardHTML('Tiempo promedio de interacción', formatDuration(avgTimeCur), calcDelta(avgTimeCur,avgTimePrev), 'por usuario activo, por día') + `<svg class="kpi-spark" id="sparkAvgTime" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
-  renderSparkSVG(document.getElementById('sparkAvgTime'), avgTimeSeries, '--warm', false);
+  if(engDuration === null || engActiveUsers === null){
+    document.getElementById('cardAvgEngTime').innerHTML = kpiUnavailableHTML('Tiempo promedio de interacción', avgTimeTip, live.errors && live.errors.engagement);
+  } else {
+    const avgTimeCur = sum(engDuration.current)/(sum(engActiveUsers.current)||1);
+    const avgTimePrev = sum(engDuration.previous)/(sum(engActiveUsers.previous)||1);
+    const avgTimeSeries = engDuration.current.map((v,i)=> engActiveUsers.current[i] ? v/engActiveUsers.current[i] : 0);
+    document.getElementById('cardAvgEngTime').innerHTML = kpiCardHTML('Tiempo promedio de interacción', avgTimeTip, formatDuration(avgTimeCur), calcDelta(avgTimeCur,avgTimePrev), 'por usuario activo, por día') + `<svg class="kpi-spark" id="sparkAvgTime" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+    renderSparkSVG(document.getElementById('sparkAvgTime'), avgTimeSeries, '--warm', false);
+  }
 
   // ---- ENGAGEMENT: Stickiness DAU/MAU ----
+  const stickTip = 'Usuarios activos en 1 día (<code>active1DayUsers</code>) sobre usuarios activos en 28 días (<code>active28DayUsers</code>). Ambas son métricas nativas de GA4 — mide hábito de uso.';
   const dau = getEngagementMetric(live, 'active1DayUsers', cfg.baseActive*0.35, 33);
   const mau = getEngagementMetric(live, 'active28DayUsers', cfg.baseActive*1.8, 34);
-  const stickCur = avg(dau.current)/(avg(mau.current)||1);
-  const stickPrev = avg(dau.previous)/(avg(mau.previous)||1);
-  const stickSeries = dau.current.map((v,i)=> mau.current[i] ? v/mau.current[i] : 0);
-  document.getElementById('cardStickiness').innerHTML = kpiCardHTML('Stickiness (DAU/MAU)', formatPct(stickCur), calcDelta(stickCur,stickPrev), 'hábito de uso: activos diarios / activos mensuales') + `<svg class="kpi-spark" id="sparkStick" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
-  renderSparkSVG(document.getElementById('sparkStick'), stickSeries, '--tertiary', false);
+  if(dau === null || mau === null){
+    document.getElementById('cardStickiness').innerHTML = kpiUnavailableHTML('Stickiness (DAU/MAU)', stickTip, live.errors && live.errors.engagement);
+  } else {
+    const stickCur = avg(dau.current)/(avg(mau.current)||1);
+    const stickPrev = avg(dau.previous)/(avg(mau.previous)||1);
+    const stickSeries = dau.current.map((v,i)=> mau.current[i] ? v/mau.current[i] : 0);
+    document.getElementById('cardStickiness').innerHTML = kpiCardHTML('Stickiness (DAU/MAU)', stickTip, formatPct(stickCur), calcDelta(stickCur,stickPrev)) + `<svg class="kpi-spark" id="sparkStick" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+    renderSparkSVG(document.getElementById('sparkStick'), stickSeries, '--tertiary', false);
+  }
 
   // ---- FUNNEL de conversión ----
   document.getElementById('funnelTitle').textContent = `Funnel principal · ${cfg.label}`;
@@ -418,25 +544,30 @@ async function render(){
   funnelRow.innerHTML = '';
   const funnelBase = [100, 55, 30];
   cfg.monetizationFunnel.forEach((step, i) => {
-    const data = getSeries(live, step.event, cfg.baseActive*(funnelBase[i]/100), 40+i);
+    const data = getSeries(live, step.event, cfg.baseActive*30*(funnelBase[i]/100), 40+i);
     const curUsers = sum(data.current), prevUsers = sum(data.previous);
-    const maxVal = cfg.baseActive * 3.2;
-    const curH = Math.max(6, (curUsers/maxVal)*130), prevH = Math.max(6, (prevUsers/maxVal)*130);
+    const maxVal = Math.max(curUsers, prevUsers, 1) * 1.15;
+    const curH = Math.max(6, (curUsers/maxVal)*120), prevH = Math.max(6, (prevUsers/maxVal)*120);
     const div = document.createElement('div');
     div.className = 'funnel-step';
     div.innerHTML = `
       <div class="funnel-bar-wrap">
-        <div class="bar previous" style="height:${prevH}px"></div>
-        <div class="bar current" style="height:${curH}px"></div>
+        <div class="bar-col">
+          <div class="bar-value">${formatNumber(prevUsers)}</div>
+          <div class="bar previous" style="height:${prevH}px"></div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-value">${formatNumber(curUsers)}</div>
+          <div class="bar current" style="height:${curH}px"></div>
+        </div>
       </div>
-      <div class="funnel-step-name">${step.name}</div>
-      <div class="funnel-step-value">${formatNumber(curUsers)} usuarios</div>
+      <div class="funnel-step-name">${step.name}${tooltipIcon('tipStep'+i, 'Evento: <code>'+step.event+'</code>')}</div>
     `;
     funnelRow.appendChild(div);
   });
 
-  document.getElementById('updatedAt').textContent = 'Actualizado ' + new Date().toLocaleDateString('es-AR', { day:'2-digit', month:'short', year:'numeric' });
-  document.getElementById('dataSourceLabel').textContent = live ? 'Datos en vivo · GA4 Data API' : 'Datos simulados · /api/dashboard no disponible';
+  document.getElementById('updatedAt').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-AR', { hour:'2-digit', minute:'2-digit' }) + ' · ' + new Date().toLocaleDateString('es-AR', { day:'2-digit', month:'short' });
+  document.getElementById('dataSourceLabel').textContent = live === null ? 'Datos simulados · /api/dashboard no disponible' : 'Datos en vivo · GA4 Data API';
 }
 
 document.querySelectorAll('.switcher button').forEach(btn => {
@@ -444,11 +575,23 @@ document.querySelectorAll('.switcher button').forEach(btn => {
     document.querySelectorAll('.switcher button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentProduct = btn.dataset.product;
-    render();
+    render(false);
   });
 });
 
-render();
+document.getElementById('periodSelect').addEventListener('change', (e) => {
+  currentPeriodDays = Number(e.target.value);
+  render(false);
+});
+
+document.getElementById('refreshBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  await render(true);
+  btn.classList.remove('spinning');
+});
+
+render(false);
 </script>
 </body>
 </html>
