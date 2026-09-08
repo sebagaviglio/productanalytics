@@ -15,176 +15,91 @@
     --font: 'Public Sans', -apple-system, sans-serif;
   }
 
-  /* ---------- Tema Bancor ---------- */
   body[data-product="bancor"]{
-    --bg-0: #061512;
-    --bg-1: #0a201b;
-    --glass: rgba(255,255,255,0.045);
-    --glass-strong: rgba(255,255,255,0.075);
-    --border: rgba(255,255,255,0.09);
-    --border-strong: rgba(255,255,255,0.16);
-    --text-0: #F3F8F6;
-    --text-1: #9FBFB8;
-    --text-2: #6C8B85;
-    --accent: #BBE813;      /* crecimiento / positivo */
-    --accent-ink: #223300;
-    --brand: #0E8079;       /* verde institucional, aclarado para contraste en oscuro */
-    --warm: #EE622B;        /* highlight secundario */
-    --tertiary: #C297FF;
-    --danger: #FF6D6D;
-    --orb-a: #0E8079;
-    --orb-b: #BBE813;
+    --bg-0: #061512; --bg-1: #0a201b;
+    --glass: rgba(255,255,255,0.045); --glass-strong: rgba(255,255,255,0.075);
+    --border: rgba(255,255,255,0.09); --border-strong: rgba(255,255,255,0.16);
+    --text-0: #F3F8F6; --text-1: #9FBFB8; --text-2: #6C8B85;
+    --accent: #BBE813; --brand: #0E8079; --warm: #EE622B; --tertiary: #C297FF; --danger: #FF6D6D;
+    --orb-a: #0E8079; --orb-b: #BBE813;
   }
-
-  /* ---------- Tema Bezza ---------- */
   body[data-product="bezza"]{
-    --bg-0: #130613;
-    --bg-1: #1c091c;
-    --glass: rgba(255,255,255,0.05);
-    --glass-strong: rgba(255,255,255,0.08);
-    --border: rgba(255,255,255,0.1);
-    --border-strong: rgba(255,255,255,0.18);
-    --text-0: #F9F2F8;
-    --text-1: #D2A9CB;
-    --text-2: #93708F;
-    --accent: #CAF14D;      /* verde brillante Bezza: crecimiento / positivo */
-    --accent-ink: #223300;
-    --brand: #14958C;       /* verde Bancor aclarado, conexión institucional */
-    --warm: #F30027;        /* rojo Bezza */
-    --tertiary: #C315AB;    /* púrpura Bezza */
-    --danger: #FF6D6D;
-    --orb-a: #F30027;
-    --orb-b: #C315AB;
+    --bg-0: #130613; --bg-1: #1c091c;
+    --glass: rgba(255,255,255,0.05); --glass-strong: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.1); --border-strong: rgba(255,255,255,0.18);
+    --text-0: #F9F2F8; --text-1: #D2A9CB; --text-2: #93708F;
+    --accent: #CAF14D; --brand: #14958C; --warm: #F30027; --tertiary: #C315AB; --danger: #FF6D6D;
+    --orb-a: #F30027; --orb-b: #C315AB;
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{background:var(--bg-0);}
   body{
-    font-family: var(--font);
-    color: var(--text-0);
+    font-family: var(--font); color: var(--text-0);
     background:
       radial-gradient(900px 500px at 15% -10%, color-mix(in srgb, var(--orb-a) 22%, transparent), transparent 60%),
       radial-gradient(700px 500px at 100% 0%, color-mix(in srgb, var(--orb-b) 16%, transparent), transparent 55%),
       var(--bg-0);
-    min-height:100vh;
-    transition: background 0.5s ease;
-    padding-bottom: 64px;
+    min-height:100vh; transition: background 0.5s ease; padding-bottom: 64px;
   }
 
   .wrap{ max-width:1240px; margin:0 auto; padding: 28px 32px 0; }
 
-  /* ---------- Topbar ---------- */
-  .topbar{
-    display:flex; align-items:center; justify-content:space-between;
-    gap:20px; padding-bottom:26px; border-bottom:1px solid var(--border);
-    flex-wrap:wrap;
-  }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:20px; padding-bottom:26px; border-bottom:1px solid var(--border); flex-wrap:wrap; }
   .brand-lockup{ display:flex; align-items:center; gap:12px; }
-  .brand-mark{
-    width:36px; height:36px; border-radius:11px;
-    background: linear-gradient(135deg, var(--orb-a), var(--orb-b));
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700; font-size:15px; color:#0a0a0a;
-  }
+  .brand-mark{ width:36px; height:36px; border-radius:11px; background: linear-gradient(135deg, var(--orb-a), var(--orb-b)); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:#0a0a0a; }
   .brand-text .t1{ font-size:15px; font-weight:600; letter-spacing:.1px; }
   .brand-text .t2{ font-size:12.5px; color:var(--text-1); }
 
-  .switcher{
-    display:flex; background:var(--glass); border:1px solid var(--border);
-    border-radius: var(--radius-pill); padding:4px; gap:4px;
-  }
-  .switcher button{
-    border:none; background:transparent; color:var(--text-1);
-    font-family:var(--font); font-size:13.5px; font-weight:500;
-    padding:9px 18px; border-radius:var(--radius-pill); cursor:pointer;
-    transition: all .25s ease;
-  }
-  .switcher button.active{
-    background: var(--text-0); color:#0a0a0a;
-  }
+  .switcher{ display:flex; background:var(--glass); border:1px solid var(--border); border-radius: var(--radius-pill); padding:4px; gap:4px; }
+  .switcher button{ border:none; background:transparent; color:var(--text-1); font-family:var(--font); font-size:13.5px; font-weight:500; padding:9px 18px; border-radius:var(--radius-pill); cursor:pointer; transition: all .25s ease; }
+  .switcher button.active{ background: var(--text-0); color:#0a0a0a; }
 
   .period-block{ display:flex; align-items:center; gap:10px; }
-  .period-pill{
-    display:flex; align-items:center; gap:8px;
-    background:var(--glass); border:1px solid var(--border);
-    border-radius: var(--radius-pill); padding:8px 16px;
-    font-size:13px; color:var(--text-1);
-  }
+  .period-pill{ display:flex; align-items:center; gap:8px; background:var(--glass); border:1px solid var(--border); border-radius: var(--radius-pill); padding:8px 16px; font-size:13px; color:var(--text-1); }
   .period-pill b{ color:var(--text-0); font-weight:500; }
-  .compare-toggle{
-    display:flex; align-items:center; gap:8px; cursor:pointer;
-    font-size:12.5px; color:var(--text-1); user-select:none;
-  }
-  .compare-toggle .box{
-    width:30px; height:17px; border-radius:999px; background:var(--glass-strong);
-    border:1px solid var(--border-strong); position:relative; transition:.2s;
-  }
-  .compare-toggle .box::after{
-    content:''; position:absolute; top:1.5px; left:2px; width:12px; height:12px;
-    border-radius:50%; background:var(--text-2); transition:.2s;
-  }
-  .compare-toggle.on .box{ background: color-mix(in srgb, var(--accent) 35%, transparent); border-color: var(--accent); }
-  .compare-toggle.on .box::after{ left:15px; background:var(--accent); }
 
-  .section-label{
-    font-size:12.5px; color:var(--text-2); font-weight:500;
-    margin: 40px 0 14px; display:flex; align-items:center; gap:10px;
-  }
-  .section-label::after{ content:''; flex:1; height:1px; background:var(--border); }
+  .section-block{ margin-top: 40px; }
+  .section-title{ font-size:19px; font-weight:600; margin-bottom:2px; }
+  .section-sub{ font-size:13px; color:var(--text-2); margin-bottom:18px; }
 
-  /* ---------- Hero ---------- */
-  .hero-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap:18px; margin-top:26px; }
-  .hero-card{
-    position:relative; overflow:hidden;
-    background: var(--glass); border:1px solid var(--border);
-    border-radius: var(--radius-hero); padding:32px;
-    display:flex; flex-direction:column; justify-content:space-between;
-    min-height: 260px;
-  }
-  .hero-card .orb{
-    position:absolute; width:340px; height:340px; border-radius:50%;
-    right:-120px; top:-120px; filter: blur(10px);
-    background: conic-gradient(from 180deg, var(--orb-a), var(--orb-b), var(--orb-a));
-    opacity:.35;
-  }
+  .hero-grid{ display:grid; grid-template-columns: 1fr; gap:18px; margin-top:26px; max-width: 460px; }
+  .hero-card{ position:relative; overflow:hidden; background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-hero); padding:28px 30px; display:flex; flex-direction:column; justify-content:space-between; min-height: 190px; }
+  .hero-card .orb{ position:absolute; width:280px; height:280px; border-radius:50%; right:-100px; top:-100px; filter: blur(10px); background: conic-gradient(from 180deg, var(--orb-a), var(--orb-b), var(--orb-a)); opacity:.3; }
   .hero-top{ position:relative; z-index:1; display:flex; justify-content:space-between; align-items:flex-start;}
   .hero-label{ font-size:13.5px; color:var(--text-1); font-weight:500; }
-  .hero-sub{ font-size:12.5px; color:var(--text-2); margin-top:4px; }
-  .delta-chip{
-    font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:var(--radius-pill);
-    display:flex; align-items:center; gap:4px;
-  }
+  .delta-chip{ font-size:12.5px; font-weight:600; padding:5px 11px; border-radius:var(--radius-pill); display:flex; align-items:center; gap:4px; white-space:nowrap; }
   .delta-chip.up{ background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); }
   .delta-chip.down{ background: color-mix(in srgb, var(--danger) 20%, transparent); color: var(--danger); }
+  .delta-chip.neutral{ background: var(--glass-strong); color: var(--text-2); }
+  .hero-number{ position:relative; z-index:1; font-size:48px; font-weight:700; letter-spacing:-1px; line-height:1; margin-top:14px;}
+  .hero-number span{ font-size:16px; color:var(--text-1); font-weight:500; margin-left:6px;}
+  .hero-spark{ width:100%; height:44px; margin-top:14px; position:relative; z-index:1; }
 
-  .hero-number{ position:relative; z-index:1; font-size:64px; font-weight:700; letter-spacing:-1.5px; line-height:1; margin-top:18px;}
-  .hero-number span{ font-size:24px; color:var(--text-1); font-weight:500; margin-left:6px;}
-  .hero-foot{ position:relative; z-index:1; display:flex; align-items:flex-end; justify-content:space-between; margin-top:20px; gap:16px;}
-  .hero-spark{ flex:1; height:60px; }
+  .card-grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+  .kpi-card{ background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-card); padding:20px 22px; display:flex; flex-direction:column; justify-content:space-between; min-height: 168px; }
+  .kpi-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+  .kpi-label{ font-size:13px; color:var(--text-1); font-weight:500; line-height:1.3; }
+  .kpi-number{ font-size:30px; font-weight:700; letter-spacing:-.5px; margin-top:14px; }
+  .kpi-note{ font-size:11px; color:var(--text-2); margin-top:4px; }
+  .kpi-spark{ width:100%; height:30px; margin-top:10px; }
 
-  .kpi-stack{ display:flex; flex-direction:column; gap:18px; }
-  .kpi-card{
-    background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-card);
-    padding:18px 20px; flex:1; display:flex; flex-direction:column; justify-content:space-between;
-  }
-  .kpi-top{ display:flex; justify-content:space-between; align-items:center; }
-  .kpi-label{ font-size:12.5px; color:var(--text-1); font-weight:500; }
-  .kpi-number{ font-size:28px; font-weight:700; letter-spacing:-.5px; margin-top:6px; }
-  .kpi-bottom{ display:flex; align-items:center; justify-content:space-between; margin-top:10px; }
-  .kpi-spark{ width:88px; height:28px; }
+  .channel-card{ background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-card); padding:20px 22px; }
+  .channel-title{ font-size:13px; color:var(--text-1); font-weight:500; margin-bottom:14px; }
+  .channel-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .channel-name{ font-size:12px; color:var(--text-0); width:110px; flex-shrink:0; text-transform:capitalize; }
+  .channel-bar-bg{ flex:1; height:8px; border-radius:5px; background:rgba(255,255,255,0.05); overflow:hidden; }
+  .channel-bar-fill{ height:100%; background: linear-gradient(90deg, var(--brand), var(--accent)); border-radius:5px; }
+  .channel-value{ font-size:11.5px; color:var(--text-1); width:52px; text-align:right; flex-shrink:0; }
+  .channel-note{ font-size:10.5px; color:var(--text-2); margin-top:12px; }
 
-  /* ---------- Funnel ---------- */
-  .funnel-card{
-    background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-hero);
-    padding:26px 30px 20px;
-  }
+  .funnel-card{ background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-hero); padding:26px 30px 20px; }
   .funnel-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; flex-wrap:wrap; gap:10px;}
   .funnel-title{ font-size:15px; font-weight:600; }
   .funnel-note{ font-size:12px; color:var(--text-2); }
   .legend{ display:flex; gap:16px; font-size:12px; color:var(--text-1); }
   .legend span{ display:flex; align-items:center; gap:6px; }
   .legend i{ width:9px; height:9px; border-radius:2px; display:inline-block; }
-
   .funnel-row{ display:flex; align-items:stretch; gap:10px; }
   .funnel-step{ flex:1; display:flex; flex-direction:column; gap:8px; }
   .funnel-bar-wrap{ height:130px; display:flex; align-items:flex-end; background:rgba(255,255,255,0.03); border-radius:10px; position:relative; overflow:hidden; padding:0 8px; gap:6px;}
@@ -194,54 +109,18 @@
   .funnel-step-name{ font-size:12.5px; color:var(--text-0); font-weight:500; margin-top:2px;}
   .funnel-step-value{ font-size:11.5px; color:var(--text-2); }
   .funnel-drop{ font-size:11px; color:var(--danger); font-weight:500; }
-  .funnel-arrow{ display:flex; align-items:center; color:var(--text-2); font-size:13px; padding-bottom:36px; }
 
-  /* ---------- Engagement grid ---------- */
-  .feature-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }
-  .feature-card{
-    background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-card);
-    padding:18px; display:flex; flex-direction:column; gap:10px;
-  }
-  .feature-head{ display:flex; justify-content:space-between; align-items:flex-start; }
-  .feature-name{ font-size:13.5px; font-weight:500; }
-  .feature-icon{ width:30px; height:30px; border-radius:9px; background: var(--glass-strong); display:flex; align-items:center; justify-content:center; font-size:14px; }
-  .feature-adopt{ font-size:26px; font-weight:700; letter-spacing:-.5px; }
-  .feature-adopt span{ font-size:13px; color:var(--text-1); font-weight:400; }
-  .feature-spark{ width:100%; height:34px; }
-  .feature-foot{ display:flex; justify-content:space-between; align-items:center; }
-  .feature-count{ font-size:11.5px; color:var(--text-2); }
+  .unavailable-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; margin-top:16px; }
+  .unavailable-card{ background: repeating-linear-gradient(135deg, var(--glass), var(--glass) 10px, rgba(255,255,255,0.015) 10px, rgba(255,255,255,0.015) 20px); border:1px dashed var(--border-strong); border-radius: var(--radius-card); padding:20px 22px; }
+  .unavailable-title{ font-size:13.5px; font-weight:600; color:var(--text-1); display:flex; align-items:center; gap:8px; }
+  .unavailable-badge{ font-size:10.5px; font-weight:600; padding:3px 9px; border-radius:var(--radius-pill); background: rgba(255,255,255,0.06); color: var(--text-2); }
+  .unavailable-text{ font-size:12.5px; color:var(--text-2); margin-top:10px; line-height:1.5; }
 
-  /* ---------- Retention + Friction ---------- */
-  .bottom-grid{ display:grid; grid-template-columns: 1.1fr 1fr; gap:16px; }
-  .panel{
-    background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-hero);
-    padding:24px 26px;
-  }
-  .panel-title{ font-size:15px; font-weight:600; margin-bottom:4px;}
-  .panel-sub{ font-size:12.5px; color:var(--text-2); margin-bottom:18px;}
-
-  .cohort-grid{ display:grid; grid-template-columns: 70px repeat(6, 1fr); gap:4px; align-items:center; }
-  .cohort-row-label{ font-size:11px; color:var(--text-2); }
-  .cohort-cell{ height:30px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:10.5px; color:var(--text-0); font-weight:500;}
-  .cohort-head{ font-size:10.5px; color:var(--text-2); text-align:center; }
-
-  .friction-list{ display:flex; flex-direction:column; gap:12px; }
-  .friction-row{ display:flex; align-items:center; gap:12px; }
-  .friction-bar-bg{ flex:1; height:8px; border-radius:5px; background:rgba(255,255,255,0.05); overflow:hidden; }
-  .friction-bar-fill{ height:100%; background: linear-gradient(90deg, var(--warm), var(--danger)); border-radius:5px; }
-  .friction-name{ font-size:12.5px; color:var(--text-0); width:190px; flex-shrink:0; }
-  .friction-pct{ font-size:12px; color:var(--text-1); width:44px; text-align:right; flex-shrink:0; }
-
-  .footnote{
-    margin-top: 34px; display:flex; justify-content:space-between; align-items:center;
-    font-size:11.5px; color: var(--text-2); flex-wrap:wrap; gap:8px;
-  }
+  .footnote{ margin-top: 40px; display:flex; justify-content:space-between; align-items:center; font-size:11.5px; color: var(--text-2); flex-wrap:wrap; gap:8px; }
   .footnote .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); display:inline-block; margin-right:6px; }
 
   @media (max-width: 980px){
-    .hero-grid, .bottom-grid{ grid-template-columns: 1fr; }
-    .feature-grid{ grid-template-columns: repeat(2, 1fr); }
-    .cohort-grid{ grid-template-columns: 60px repeat(6, 1fr); }
+    .card-grid-3, .unavailable-grid{ grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -256,73 +135,77 @@
         <div class="t2">App móvil · GA4 Data API</div>
       </div>
     </div>
-
     <div class="switcher">
       <button class="active" data-product="bancor">Bancor</button>
       <button data-product="bezza">Bezza</button>
     </div>
-
     <div class="period-block">
       <div class="period-pill">Período: <b>&nbsp;últimos 3 meses</b></div>
-      <div class="compare-toggle on" id="compareToggle">
-        <div class="box"></div> vs. 3 meses anteriores
-      </div>
     </div>
   </div>
 
-  <!-- NIVEL 0 — RESUMEN EJECUTIVO -->
-  <div class="section-label">Nivel 0 · Resumen ejecutivo</div>
+  <!-- HERO -->
   <div class="hero-grid">
     <div class="hero-card">
       <div class="orb"></div>
       <div class="hero-top">
-        <div>
-          <div class="hero-label" id="heroLabel">Usuarios activos (app)</div>
-          <div class="hero-sub" id="heroSub">Promedio diario · últimos 90 días</div>
-        </div>
+        <div class="hero-label" id="heroLabel">Usuarios activos (app)</div>
         <div class="delta-chip up" id="heroDelta">+0%</div>
       </div>
-      <div class="hero-number" id="heroNumber">0<span id="heroUnit"></span></div>
-      <div class="hero-foot">
-        <svg class="hero-spark" id="heroSpark" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>
-      </div>
+      <div class="hero-number" id="heroNumber">0<span>usuarios / día</span></div>
+      <svg class="hero-spark" id="heroSpark" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>
     </div>
-
-    <div class="kpi-stack" id="kpiStack"></div>
   </div>
 
-  <!-- NIVEL 1 — FUNNEL -->
-  <div class="section-label">Nivel 1 · Adquisición y activación</div>
-  <div class="funnel-card">
-    <div class="funnel-head">
-      <div>
-        <div class="funnel-title" id="funnelTitle">Funnel de onboarding</div>
-        <div class="funnel-note">Usuarios que alcanzan cada paso, período actual vs. anterior</div>
-      </div>
-      <div class="legend">
-        <span><i style="background:var(--accent)"></i>Período actual</span>
-        <span><i style="background:var(--glass-strong); border:1px solid var(--border-strong)"></i>Período anterior</span>
-      </div>
+  <!-- ADQUISICIÓN Y ACTIVACIÓN -->
+  <div class="section-block">
+    <div class="section-title">Adquisición y Activación</div>
+    <div class="section-sub">De dónde vienen los usuarios y qué tan bien convierten hasta estar operativos</div>
+    <div class="card-grid-3">
+      <div class="kpi-card" id="cardRegConversion"></div>
+      <div class="kpi-card" id="cardKycCompletion"></div>
+      <div class="channel-card" id="cardChannels"></div>
     </div>
-    <div class="funnel-row" id="funnelRow"></div>
   </div>
 
-  <!-- NIVEL 2 — ENGAGEMENT -->
-  <div class="section-label">Nivel 2 · Engagement y uso core</div>
-  <div class="feature-grid" id="featureGrid"></div>
-
-  <!-- NIVEL 3 + 4 — RETENCIÓN Y FRICCIÓN -->
-  <div class="section-label">Nivel 3 y 4 · Retención y fricción</div>
-  <div class="bottom-grid">
-    <div class="panel">
-      <div class="panel-title">Retención por cohorte semanal</div>
-      <div class="panel-sub">% de usuarios que vuelven a abrir la app, semanas 0 a 5</div>
-      <div class="cohort-grid" id="cohortGrid"></div>
+  <!-- COMPROMISO Y USO DEL PRODUCTO -->
+  <div class="section-block">
+    <div class="section-title">Compromiso y Uso del Producto (Engagement)</div>
+    <div class="section-sub">Qué tan seguido y cuánto usan la app quienes ya entraron</div>
+    <div class="card-grid-3">
+      <div class="kpi-card" id="cardEngagementRate"></div>
+      <div class="kpi-card" id="cardAvgEngTime"></div>
+      <div class="kpi-card" id="cardStickiness"></div>
     </div>
-    <div class="panel">
-      <div class="panel-title">Errores por pantalla</div>
-      <div class="panel-sub">Eventos error_received / *_error, % sobre intentos del flujo</div>
-      <div class="friction-list" id="frictionList"></div>
+  </div>
+
+  <!-- CONVERSIÓN Y MONETIZACIÓN -->
+  <div class="section-block">
+    <div class="section-title">Conversión y Monetización (Funnel)</div>
+    <div class="section-sub">Del alta de cuenta a la primera transacción de valor</div>
+    <div class="funnel-card">
+      <div class="funnel-head">
+        <div>
+          <div class="funnel-title" id="funnelTitle">Funnel principal</div>
+          <div class="funnel-note">Usuarios que alcanzan cada paso, período actual vs. anterior</div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--accent)"></i>Período actual</span>
+          <span><i style="background:var(--glass-strong); border:1px solid var(--border-strong)"></i>Período anterior</span>
+        </div>
+      </div>
+      <div class="funnel-row" id="funnelRow"></div>
+    </div>
+
+    <div class="unavailable-grid">
+      <div class="unavailable-card">
+        <div class="unavailable-title">Valor de la transacción <span class="unavailable-badge">No disponible</span></div>
+        <div class="unavailable-text">No hay eventos <code>purchase</code> / <code>in_app_purchase</code> ni parámetros de <code>value</code>/<code>currency</code> en el export de GA4 de ninguna de las dos apps. Para habilitar esto, dev tiene que agregar esos parámetros a los eventos de transacción.</div>
+      </div>
+      <div class="unavailable-card">
+        <div class="unavailable-title">Probabilidad predictiva <span class="unavailable-badge">No disponible</span></div>
+        <div class="unavailable-text">Las métricas predictivas de GA4 (probabilidad de compra/abandono) alimentan Audiencias Predictivas de Google Ads/Optimize, no se exponen como métrica de reporting vía Data API. Además requieren eventos <code>purchase</code>, que tampoco existen hoy.</div>
+      </div>
     </div>
   </div>
 
@@ -335,85 +218,38 @@
 
 <script>
 /* ============================================================
-   1) CONFIG POR PRODUCTO
-   Acá vive todo lo que cambia entre Bancor y Bezza: nombre de
-   eventos (según el plan de medición), features del Nivel 2,
-   pasos del funnel de Nivel 1 y textos del header.
+   1) CONFIG POR PRODUCTO — refleja src/config/products.js del backend
    ============================================================ */
 const PRODUCTS = {
   bancor: {
-    label: 'Bancor',
-    mark: 'B',
-    title: 'Bancor · Product analytics',
-    heroLabel: 'Usuarios activos (app)',
-    heroEvent: 'active_users',
-    baseActive: 46000,
-    kpis: [
-      { label: 'Cuentas nuevas (enrollment)', type: 'count', events: ['clic_enrollment_paso3B'], base: 3200, format: 'int' },
-      { label: 'Conversión onboarding', type: 'ratio', numerator: ['clic_enrollment_paso3B'], denominator: ['clic_onboarding_paso1'], base: 0.61, format: 'pct' },
-      { label: 'Transacciones core', type: 'count', events: ['clic_solicitar_prestamo_step4', 'clic_echeq'], base: 210000, format: 'int' },
-    ],
-    funnel: [
-      { name: 'Onboarding paso 1', event: 'clic_onboarding_paso1' },
-      { name: 'Onboarding paso 2', event: 'clic_onboarding_paso2' },
-      { name: 'Onboarding paso 3', event: 'clic_onboarding_paso3' },
-      { name: 'Enrollment completo', event: 'clic_enrollment_paso3B' },
-    ],
-    features: [
-      { name: 'Préstamos', event: 'clic_solicitar_prestamo_step4', icon: '$' },
-      { name: 'ECHEQ', event: 'clic_echeq', icon: 'E' },
-      { name: 'Pago de servicios', event: 'clic_pago_servicios', icon: 'S' },
-      { name: 'Alta tarjeta de crédito', event: 'clic_habillitar_TC', icon: 'T' },
+    label: 'Bancor', mark: 'B', title: 'Bancor · Product analytics',
+    heroEvent: 'active_users', baseActive: 46000,
+    acquisition: { registrationEvent: 'clic_enrollment_paso3B', kyc: { start: 'clic_onboarding_paso1', complete: 'clic_onboarding_paso3' } },
+    monetizationFunnel: [
+      { name: 'Cuenta creada', event: 'clic_enrollment_paso3B' },
+      { name: 'KYC verificado', event: 'clic_onboarding_paso3' },
+      { name: 'Primera transacción', event: 'clic_solicitar_prestamo_step4' },
     ],
   },
   bezza: {
-    label: 'Bezza',
-    mark: 'b',
-    title: 'Bezza · Product analytics',
-    heroLabel: 'Usuarios activos (app)',
-    heroEvent: 'active_users',
-    baseActive: 18500,
-    kpis: [
-      { label: 'Cuentas nuevas', type: 'count', events: ['account_creation_success'], base: 2100, format: 'int' },
-      { label: 'Conversión onboarding', type: 'ratio', numerator: ['onboarding_kyc_complete'], denominator: ['onboarding_dnigender'], base: 0.54, format: 'pct' },
-      { label: 'Transacciones core', type: 'count', events: ['transfer_success', 'qr_payment_confirmed'], base: 96000, format: 'int' },
-    ],
-    funnel: [
-      { name: 'Tutorial', event: 'tutorial_start' },
-      { name: 'Signup iniciado', event: 'signup_start' },
-      { name: 'Signup exitoso', event: 'signup_success' },
-      { name: 'KYC iniciado', event: 'onboarding_dnigender' },
-      { name: 'KYC completo', event: 'onboarding_kyc_complete' },
-    ],
-    features: [
-      { name: 'Transferencias', event: 'transfer_success', icon: '→' },
-      { name: 'Pago con QR', event: 'qr_payment_confirmed', icon: 'Q' },
-      { name: 'Beneficios', event: 'benefits_list_view', icon: '★' },
-      { name: 'Cuenta remunerada', event: 'rewarded_account_modal_view', icon: '%' },
+    label: 'Bezza', mark: 'b', title: 'Bezza · Product analytics',
+    heroEvent: 'active_users', baseActive: 18500,
+    acquisition: { registrationEvent: 'account_creation_success', kyc: { start: 'onboarding_dnigender', complete: 'onboarding_kyc_complete' } },
+    monetizationFunnel: [
+      { name: 'Cuenta creada', event: 'account_creation_success' },
+      { name: 'KYC verificado', event: 'onboarding_kyc_complete' },
+      { name: 'Primera transacción', event: 'transfer_success' },
     ],
   }
 };
-  
+
 let currentProduct = 'bancor';
-let compareEnabled = true;
 
 /* ============================================================
-   2a) CONEXIÓN AL BACKEND REAL
-   El backend expone GET {API_BASE}/api/dashboard?product=bancor|bezza
-   y devuelve { activeUsers, events: { [eventName]: {current, previous} } }
-   en el mismo shape que ya usaban las fórmulas de este archivo.
-
-   Por defecto usa ruta relativa ('') porque este archivo se sirve desde
-   /public en el mismo proyecto de Vercel que expone /api/dashboard — no
-   hace falta configurar dominio ni CORS. Si alguna vez separás front y
-   back en dos deploys distintos, definí antes de este script:
-   window.GA4_API_BASE = 'https://tu-backend.vercel.app'  (definido en un tag <script> propio, ANTES de este archivo)
-
-   Si el backend no responde, cae automáticamente a los datos simulados
-   de fetchGA4Metric() de más abajo, así la demo nunca se rompe.
+   2) CONEXIÓN AL BACKEND — ruta relativa (mismo proyecto Vercel)
    ============================================================ */
 const API_BASE = window.GA4_API_BASE || '';
-const liveDataCache = {}; // productKey -> payload del backend, o null si falló
+const liveDataCache = {};
 
 async function fetchLiveData(productKey){
   if(liveDataCache[productKey] !== undefined) return liveDataCache[productKey];
@@ -430,144 +266,76 @@ async function fetchLiveData(productKey){
   }
 }
 
-// Devuelve la serie real del backend si existe ese evento; si no, cae al mock.
 function getSeries(live, eventName, base, seed){
-  if(live && live.events && live.events[eventName]){
-    return live.events[eventName];
-  }
+  if(live && live.events && live.events[eventName]){ return live.events[eventName]; }
   return fetchGA4Metric(eventName, base, seed);
 }
+function getEngagementMetric(live, metricName, base, seed){
+  if(live && live.engagement && live.engagement[metricName]){ return live.engagement[metricName]; }
+  return fetchGA4Metric('engagement_'+metricName, base, seed);
+}
 
 /* ============================================================
-   2b) FUENTE DE DATOS MOCK — usada como fallback
-   Simula 180 días de conteo diario de un evento con la misma forma
-   que devolvería el backend (current/previous), para que el tablero
-   funcione standalone sin backend levantado.
+   3) MOCK — fallback si el backend no responde
    ============================================================ */
 function seededRandom(seed){
-  let s = seed % 2147483647;
-  if (s <= 0) s += 2147483646;
-  return function(){
-    s = (s * 16807) % 2147483647;
-    return (s - 1) / 2147483646;
-  };
+  let s = seed % 2147483647; if (s <= 0) s += 2147483646;
+  return function(){ s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
 }
-
-// Simula 180 días de conteo diario de un evento: estacionalidad semanal
-// + leve tendencia + ruido. Los primeros 90 = período anterior,
-// los últimos 90 = período actual (misma forma que devolvería runReport
-// con dos dateRanges concatenados).
+function hashCode(str){ let h=0; for(let i=0;i<str.length;i++){ h=((h<<5)-h)+str.charCodeAt(i); h|=0; } return Math.abs(h); }
 function fetchGA4Metric(eventName, baseValue, seedOffset){
   const rnd = seededRandom(hashCode(eventName) + seedOffset);
-  const days = 180;
-  const series = [];
-  const trend = 1 + (rnd() * 0.35); // crecimiento acumulado a lo largo de la serie
-  for(let i=0; i<days; i++){
-    const weekday = i % 7;
-    const weekendDrop = (weekday === 5 || weekday === 6) ? 0.82 : 1;
-    const progress = i / days;
-    const growth = 1 + (trend - 1) * progress;
-    const noise = 0.9 + rnd() * 0.2;
-    const value = baseValue * growth * weekendDrop * noise / 30; // valor diario aprox
-    series.push(Math.max(0, Math.round(value)));
+  const days = 180; const series = []; const trend = 1 + (rnd() * 0.35);
+  for(let i=0;i<days;i++){
+    const weekday = i % 7; const weekendDrop = (weekday===5||weekday===6) ? 0.82 : 1;
+    const progress = i/days; const growth = 1 + (trend-1)*progress; const noise = 0.9 + rnd()*0.2;
+    series.push(Math.max(0, Math.round(baseValue*growth*weekendDrop*noise/30)));
   }
-  return {
-    previous: series.slice(0, 90),
-    current: series.slice(90, 180),
-  };
+  return { previous: series.slice(0,90), current: series.slice(90,180) };
 }
-
-function hashCode(str){
-  let hash = 0;
-  for(let i=0; i<str.length; i++){
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash);
+function mockChannels(seed){
+  const rnd = seededRandom(hashCode('channels')+seed);
+  const names = ['Organic Search','Direct','Referral','Paid Search','Organic Social','Email'];
+  return names.map(channel => ({ channel, newUsers: Math.round(500 + rnd()*4000) })).sort((a,b)=>b.newUsers-a.newUsers);
 }
 
 /* ============================================================
-   3) FÓRMULAS DE KPIs
-   Cada función documenta qué mide y qué eventos GA4 combina.
+   4) FÓRMULAS
    ============================================================ */
+const sum = (arr) => arr.reduce((a,b)=>a+b,0);
+const avg = (arr) => arr.length ? sum(arr)/arr.length : 0;
+function calcDelta(current, previous){ if(previous===0) return 0; return ((current-previous)/previous)*100; }
+function formatNumber(n){ if(n>=1000000) return (n/1000000).toFixed(1)+'M'; if(n>=1000) return (n/1000).toFixed(1)+'k'; return Math.round(n).toString(); }
+function formatPct(n){ return (n*100).toFixed(1)+'%'; }
+function formatDuration(seconds){ const m = Math.floor(seconds/60); const s = Math.round(seconds%60); return `${m}m ${s}s`; }
 
-// Suma una serie diaria -> total del período
-const sum = (arr) => arr.reduce((a,b) => a+b, 0);
-
-// % de variación entre período actual y anterior
-// delta = (actual - anterior) / anterior
-function calcDelta(current, previous){
-  if(previous === 0) return 0;
-  return ((current - previous) / previous) * 100;
-}
-
-// Tasa de conversión entre dos pasos de un funnel
-// conversion = usuarios_paso_siguiente / usuarios_paso_anterior
-function calcStepConversion(stepUsers, prevStepUsers){
-  if(prevStepUsers === 0) return 0;
-  return stepUsers / prevStepUsers;
-}
-
-// Ratio de stickiness (engagement): DAU promedio / usuarios activos del período
-// usado como proxy de frecuencia de uso
-function calcStickiness(dailyAvg, periodActive){
-  if(periodActive === 0) return 0;
-  return dailyAvg / periodActive;
-}
-
-// Adopción de una feature: eventos de la feature / usuarios activos totales
-// (mock: se usa el total de eventos como proxy de usuarios que la usaron)
-function calcAdoptionRate(featureTotal, activeTotal){
-  if(activeTotal === 0) return 0;
-  return Math.min(1, featureTotal / activeTotal);
-}
-
-// Suma varias series diarias elemento a elemento (ej: transfer_success + qr_payment_confirmed)
-function sumSeries(seriesList){
-  const length = Math.max(...seriesList.map(s => s.length));
-  const out = new Array(length).fill(0);
-  seriesList.forEach(s => s.forEach((v,i) => out[i] += v));
-  return out;
-}
-
-function formatNumber(n){
-  if(n >= 1000000) return (n/1000000).toFixed(1) + 'M';
-  if(n >= 1000) return (n/1000).toFixed(1) + 'k';
-  return Math.round(n).toString();
-}
-function formatPct(n){ return (n*100).toFixed(0) + '%'; }
-
-/* ============================================================
-   4) RENDER
-   ============================================================ */
 function sparklinePath(values, w, h, padding=4){
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const range = (max - min) || 1;
-  const step = (w - padding*2) / (values.length - 1);
-  return values.map((v,i) => {
-    const x = padding + i*step;
-    const y = h - padding - ((v - min) / range) * (h - padding*2);
-    return `${i===0? 'M':'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
-  }).join(' ');
+  const max = Math.max(...values), min = Math.min(...values), range=(max-min)||1;
+  const step = (w-padding*2)/(values.length-1);
+  return values.map((v,i)=>{ const x=padding+i*step; const y=h-padding-((v-min)/range)*(h-padding*2); return `${i===0?'M':'L'} ${x.toFixed(1)} ${y.toFixed(1)}`; }).join(' ');
+}
+function renderSparkSVG(svgEl, values, colorVar, filled){
+  const w=400,h=60; const path = sparklinePath(values,w,h);
+  const areaPath = path + ` L ${w-4} ${h-4} L 4 ${h-4} Z`;
+  svgEl.innerHTML = `<defs><linearGradient id="grad-${svgEl.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(${colorVar})" stop-opacity="0.35"/><stop offset="100%" stop-color="var(${colorVar})" stop-opacity="0"/></linearGradient></defs>${filled?`<path d="${areaPath}" fill="url(#grad-${svgEl.id})" stroke="none"/>`:''}<path d="${path}" fill="none" stroke="var(${colorVar})" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
 }
 
-function renderSparkSVG(svgEl, values, colorVar, filled){
-  const w = 400, h = 60;
-  const path = sparklinePath(values, w, h);
-  const areaPath = path + ` L ${w-4} ${h-4} L 4 ${h-4} Z`;
-  svgEl.innerHTML = `
-    <defs>
-      <linearGradient id="grad-${svgEl.id}" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="var(${colorVar})" stop-opacity="0.35"/>
-        <stop offset="100%" stop-color="var(${colorVar})" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    ${filled ? `<path d="${areaPath}" fill="url(#grad-${svgEl.id})" stroke="none"/>` : ''}
-    <path d="${path}" fill="none" stroke="var(${colorVar})" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+function kpiCardHTML(label, valueStr, deltaPct, note){
+  const dirClass = deltaPct===null ? 'neutral' : (deltaPct>=0?'up':'down');
+  const deltaText = deltaPct===null ? 'sin comparación' : `${deltaPct>=0?'+':''}${deltaPct.toFixed(1)}% vs. anterior`;
+  return `
+    <div class="kpi-top">
+      <div class="kpi-label">${label}</div>
+      <div class="delta-chip ${dirClass}">${deltaText}</div>
+    </div>
+    <div class="kpi-number">${valueStr}</div>
+    ${note ? `<div class="kpi-note">${note}</div>` : ''}
   `;
 }
 
+/* ============================================================
+   5) RENDER
+   ============================================================ */
 async function render(){
   const cfg = PRODUCTS[currentProduct];
   document.body.setAttribute('data-product', currentProduct);
@@ -577,84 +345,83 @@ async function render(){
 
   const live = await fetchLiveData(currentProduct);
 
-  // ---- HERO (North star: usuarios activos) ----
+  // ---- HERO: usuarios activos ----
   const heroData = (live && live.activeUsers) ? live.activeUsers : fetchGA4Metric(cfg.heroEvent, cfg.baseActive, 1);
-  const heroCurrentAvg = sum(heroData.current) / heroData.current.length;
-  const heroPrevAvg = sum(heroData.previous) / heroData.previous.length;
-  const heroDelta = calcDelta(heroCurrentAvg, heroPrevAvg);
-
-  document.getElementById('heroLabel').textContent = cfg.heroLabel;
-  document.getElementById('heroNumber').innerHTML = formatNumber(heroCurrentAvg) + '<span>usuarios / día</span>';
+  const heroCurAvg = avg(heroData.current), heroPrevAvg = avg(heroData.previous);
+  const heroDelta = calcDelta(heroCurAvg, heroPrevAvg);
+  document.getElementById('heroNumber').innerHTML = formatNumber(heroCurAvg) + '<span>usuarios / día</span>';
   const heroChip = document.getElementById('heroDelta');
-  heroChip.textContent = (heroDelta >= 0 ? '+' : '') + heroDelta.toFixed(1) + '% vs. período anterior';
-  heroChip.className = 'delta-chip ' + (heroDelta >= 0 ? 'up' : 'down');
-  renderSparkSVG(document.getElementById('heroSpark'),
-    compareEnabled ? heroData.previous.concat(heroData.current) : heroData.current,
-    '--accent', true);
+  heroChip.textContent = (heroDelta>=0?'+':'') + heroDelta.toFixed(1) + '% vs. período anterior';
+  heroChip.className = 'delta-chip ' + (heroDelta>=0?'up':'down');
+  renderSparkSVG(document.getElementById('heroSpark'), heroData.current, '--accent', true);
 
-  // ---- KPI stack ----
-  const kpiStack = document.getElementById('kpiStack');
-  kpiStack.innerHTML = '';
-  cfg.kpis.forEach((kpi, idx) => {
-    let curSeries, prevSeries, curVal, prevVal;
+  // ---- ADQUISICIÓN: Tasa de conversión de registro ----
+  const regData = getSeries(live, cfg.acquisition.registrationEvent, cfg.baseActive*0.08, 10);
+  const firstOpenData = getSeries(live, 'first_open', cfg.baseActive*0.6, 11);
+  const regCur = sum(regData.current)/(sum(firstOpenData.current)||1);
+  const regPrev = sum(regData.previous)/(sum(firstOpenData.previous)||1);
+  const regSeries = regData.current.map((v,i)=> firstOpenData.current[i] ? v/firstOpenData.current[i] : 0);
+  document.getElementById('cardRegConversion').innerHTML = kpiCardHTML('Tasa de conversión de registro', formatPct(regCur), calcDelta(regCur,regPrev), 'altas / primeras aperturas') + `<svg class="kpi-spark" id="sparkReg" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+  renderSparkSVG(document.getElementById('sparkReg'), regSeries, '--accent', false);
 
-    if(kpi.type === 'ratio'){
-      // Conversión = eventos numerador / eventos denominador, día a día
-      const numData = sumSeries(kpi.numerator.map((e,i) => getSeries(live, e, kpi.base * 40, 10+idx+i).current));
-      const numPrev  = sumSeries(kpi.numerator.map((e,i) => getSeries(live, e, kpi.base * 40, 10+idx+i).previous));
-      const denData = sumSeries(kpi.denominator.map((e,i) => getSeries(live, e, kpi.base * 65, 15+idx+i).current));
-      const denPrev  = sumSeries(kpi.denominator.map((e,i) => getSeries(live, e, kpi.base * 65, 15+idx+i).previous));
-      curVal = calcStepConversion(sum(numData), sum(denData));
-      prevVal = calcStepConversion(sum(numPrev), sum(denPrev));
-      // serie diaria de conversión, para el sparkline
-      curSeries = numData.map((v,i) => denData[i] ? v/denData[i] : 0);
-    } else {
-      // Count compuesto = suma de una o más series de eventos
-      const seriesPerEvent = kpi.events.map((e,i) => getSeries(live, e, kpi.base / kpi.events.length, 10+idx+i));
-      curSeries = sumSeries(seriesPerEvent.map(s => s.current));
-      prevSeries = sumSeries(seriesPerEvent.map(s => s.previous));
-      curVal = sum(curSeries);
-      prevVal = sum(prevSeries);
-    }
+  // ---- ADQUISICIÓN: Tasa de completitud KYC ----
+  const kycStartData = getSeries(live, cfg.acquisition.kyc.start, cfg.baseActive*0.3, 12);
+  const kycCompleteData = getSeries(live, cfg.acquisition.kyc.complete, cfg.baseActive*0.18, 13);
+  const kycCur = sum(kycCompleteData.current)/(sum(kycStartData.current)||1);
+  const kycPrev = sum(kycCompleteData.previous)/(sum(kycStartData.previous)||1);
+  const kycSeries = kycCompleteData.current.map((v,i)=> kycStartData.current[i] ? v/kycStartData.current[i] : 0);
+  document.getElementById('cardKycCompletion').innerHTML = kpiCardHTML('Tasa de completitud de KYC', formatPct(kycCur), calcDelta(kycCur,kycPrev), 'validación de identidad completa / iniciada') + `<svg class="kpi-spark" id="sparkKyc" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+  renderSparkSVG(document.getElementById('sparkKyc'), kycSeries, '--tertiary', false);
 
-    const delta = calcDelta(curVal, prevVal);
-    const displayVal = kpi.format === 'pct' ? formatPct(curVal) : formatNumber(curVal);
-
-    const card = document.createElement('div');
-    card.className = 'kpi-card';
-    const sparkId = `spark-kpi-${idx}`;
-    card.innerHTML = `
-      <div class="kpi-top">
-        <div class="kpi-label">${kpi.label}</div>
-        <div class="delta-chip ${delta>=0?'up':'down'}" style="font-size:11px; padding:3px 9px;">${delta>=0?'+':''}${delta.toFixed(1)}%</div>
+  // ---- ADQUISICIÓN: usuarios nuevos por canal ----
+  const channels = (live && live.channels && live.channels.length) ? live.channels : mockChannels(20);
+  const maxChannel = Math.max(...channels.map(c=>c.newUsers), 1);
+  document.getElementById('cardChannels').innerHTML = `
+    <div class="channel-title">Usuarios nuevos por canal</div>
+    ${channels.slice(0,5).map(c => `
+      <div class="channel-row">
+        <div class="channel-name">${c.channel}</div>
+        <div class="channel-bar-bg"><div class="channel-bar-fill" style="width:${(c.newUsers/maxChannel*100).toFixed(0)}%"></div></div>
+        <div class="channel-value">${formatNumber(c.newUsers)}</div>
       </div>
-      <div class="kpi-number">${displayVal}</div>
-      <div class="kpi-bottom">
-        <svg class="kpi-spark" id="${sparkId}" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>
-      </div>
-    `;
-    kpiStack.appendChild(card);
-    renderSparkSVG(document.getElementById(sparkId), curSeries, idx===1 ? '--warm' : '--tertiary', false);
-  });
+    `).join('')}
+    <div class="channel-note">No incluye costo — requiere vincular Google Ads a la property</div>
+  `;
 
-  // ---- FUNNEL ----
-  document.getElementById('funnelTitle').textContent = `Funnel de onboarding · ${cfg.label}`;
+  // ---- ENGAGEMENT: Tasa de interacción ----
+  const engRate = getEngagementMetric(live, 'engagementRate', 0.55, 30);
+  const engRateCur = avg(engRate.current), engRatePrev = avg(engRate.previous);
+  document.getElementById('cardEngagementRate').innerHTML = kpiCardHTML('Tasa de interacción (Engagement Rate)', formatPct(engRateCur), calcDelta(engRateCur,engRatePrev), 'sesiones de 10s+, 2+ pantallas o evento clave') + `<svg class="kpi-spark" id="sparkEngRate" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+  renderSparkSVG(document.getElementById('sparkEngRate'), engRate.current, '--accent', false);
+
+  // ---- ENGAGEMENT: Tiempo promedio de interacción ----
+  const engDuration = getEngagementMetric(live, 'userEngagementDuration', cfg.baseActive*140, 31);
+  const engActiveUsers = getEngagementMetric(live, 'activeUsers', cfg.baseActive, 32);
+  const avgTimeCur = sum(engDuration.current)/(sum(engActiveUsers.current)||1);
+  const avgTimePrev = sum(engDuration.previous)/(sum(engActiveUsers.previous)||1);
+  const avgTimeSeries = engDuration.current.map((v,i)=> engActiveUsers.current[i] ? v/engActiveUsers.current[i] : 0);
+  document.getElementById('cardAvgEngTime').innerHTML = kpiCardHTML('Tiempo promedio de interacción', formatDuration(avgTimeCur), calcDelta(avgTimeCur,avgTimePrev), 'por usuario activo, por día') + `<svg class="kpi-spark" id="sparkAvgTime" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+  renderSparkSVG(document.getElementById('sparkAvgTime'), avgTimeSeries, '--warm', false);
+
+  // ---- ENGAGEMENT: Stickiness DAU/MAU ----
+  const dau = getEngagementMetric(live, 'active1DayUsers', cfg.baseActive*0.35, 33);
+  const mau = getEngagementMetric(live, 'active28DayUsers', cfg.baseActive*1.8, 34);
+  const stickCur = avg(dau.current)/(avg(mau.current)||1);
+  const stickPrev = avg(dau.previous)/(avg(mau.previous)||1);
+  const stickSeries = dau.current.map((v,i)=> mau.current[i] ? v/mau.current[i] : 0);
+  document.getElementById('cardStickiness').innerHTML = kpiCardHTML('Stickiness (DAU/MAU)', formatPct(stickCur), calcDelta(stickCur,stickPrev), 'hábito de uso: activos diarios / activos mensuales') + `<svg class="kpi-spark" id="sparkStick" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>`;
+  renderSparkSVG(document.getElementById('sparkStick'), stickSeries, '--tertiary', false);
+
+  // ---- FUNNEL de conversión ----
+  document.getElementById('funnelTitle').textContent = `Funnel principal · ${cfg.label}`;
   const funnelRow = document.getElementById('funnelRow');
   funnelRow.innerHTML = '';
-  const funnelBase = [100, 68, 52, 40, 27]; // % relativo ilustrativo, paso 0 = 100
-  let prevCurrentUsers = null, prevPreviousUsers = null;
-  cfg.funnel.forEach((step, i) => {
-    const data = getSeries(live, step.event, cfg.baseActive * (funnelBase[i]/100), 20 + i);
-    const curUsers = sum(data.current);
-    const prevUsers = sum(data.previous);
-    const stepConversion = prevCurrentUsers ? calcStepConversion(curUsers, prevCurrentUsers) : 1;
-    prevCurrentUsers = curUsers;
-    prevPreviousUsers = prevUsers;
-
+  const funnelBase = [100, 55, 30];
+  cfg.monetizationFunnel.forEach((step, i) => {
+    const data = getSeries(live, step.event, cfg.baseActive*(funnelBase[i]/100), 40+i);
+    const curUsers = sum(data.current), prevUsers = sum(data.previous);
     const maxVal = cfg.baseActive * 3.2;
-    const curH = Math.max(6, (curUsers / maxVal) * 130);
-    const prevH = Math.max(6, (prevUsers / maxVal) * 130);
-
+    const curH = Math.max(6, (curUsers/maxVal)*130), prevH = Math.max(6, (prevUsers/maxVal)*130);
     const div = document.createElement('div');
     div.className = 'funnel-step';
     div.innerHTML = `
@@ -664,73 +431,12 @@ async function render(){
       </div>
       <div class="funnel-step-name">${step.name}</div>
       <div class="funnel-step-value">${formatNumber(curUsers)} usuarios</div>
-      ${i>0 ? `<div class="funnel-drop">conv. ${(stepConversion*100).toFixed(0)}%</div>` : '<div class="funnel-drop" style="color:var(--text-2)">punto de entrada</div>'}
     `;
     funnelRow.appendChild(div);
   });
 
-  // ---- ENGAGEMENT (Nivel 2) ----
-  const featureGrid = document.getElementById('featureGrid');
-  featureGrid.innerHTML = '';
-  const activeTotalForAdoption = sum(heroData.current);
-  cfg.features.forEach((f, i) => {
-    const data = getSeries(live, f.event, cfg.baseActive * 0.6, 40 + i);
-    const total = sum(data.current);
-    const adoption = calcAdoptionRate(total, activeTotalForAdoption);
-    const card = document.createElement('div');
-    card.className = 'feature-card';
-    const sparkId = `spark-feat-${i}`;
-    card.innerHTML = `
-      <div class="feature-head">
-        <div class="feature-name">${f.name}</div>
-        <div class="feature-icon">${f.icon}</div>
-      </div>
-      <div class="feature-adopt">${formatPct(adoption)} <span>adopción</span></div>
-      <svg class="feature-spark" id="${sparkId}" viewBox="0 0 400 60" preserveAspectRatio="none"></svg>
-      <div class="feature-foot">
-        <div class="feature-count">${formatNumber(total)} eventos / 90d</div>
-      </div>
-    `;
-    featureGrid.appendChild(card);
-    renderSparkSVG(document.getElementById(sparkId), data.current, '--accent', true);
-  });
-
-  // ---- RETENCIÓN (cohortes) ----
-  const cohortGrid = document.getElementById('cohortGrid');
-  cohortGrid.innerHTML = '<div></div>' + [0,1,2,3,4,5].map(w => `<div class="cohort-head">S${w}</div>`).join('');
-  const rnd = seededRandom(hashCode(currentProduct + 'cohort'));
-  for(let c=0; c<5; c++){
-    cohortGrid.innerHTML += `<div class="cohort-row-label">Cohorte ${c+1}</div>`;
-    let retention = 100;
-    for(let w=0; w<6; w++){
-      if(w>0) retention = retention * (0.62 + rnd()*0.18);
-      const alpha = Math.max(0.08, retention/100);
-      cohortGrid.innerHTML += `<div class="cohort-cell" style="background: color-mix(in srgb, var(--accent) ${(alpha*80).toFixed(0)}%, transparent)">${w===0?'100%':retention.toFixed(0)+'%'}</div>`;
-    }
-  }
-
-  // ---- FRICCIÓN ----
-  const frictionList = document.getElementById('frictionList');
-  const frictionEvents = currentProduct === 'bancor'
-    ? ['Solicitud de préstamo', 'Enrollment (documento)', 'ECHEQ', 'PaP / PdH']
-    : ['Transferencias', 'Pago con QR', 'Verificación KYC', 'Recupero de contraseña'];
-  frictionList.innerHTML = '';
-  frictionEvents.forEach((name, i) => {
-    const rndF = seededRandom(hashCode(name));
-    const pct = 3 + rndF()*14;
-    frictionList.innerHTML += `
-      <div class="friction-row">
-        <div class="friction-name">${name}</div>
-        <div class="friction-bar-bg"><div class="friction-bar-fill" style="width:${pct*4}%"></div></div>
-        <div class="friction-pct">${pct.toFixed(1)}%</div>
-      </div>
-    `;
-  });
-
   document.getElementById('updatedAt').textContent = 'Actualizado ' + new Date().toLocaleDateString('es-AR', { day:'2-digit', month:'short', year:'numeric' });
-  document.getElementById('dataSourceLabel').textContent = live
-    ? `Datos en vivo · GA4 Data API`
-    : `Datos simulados · /api/dashboard no disponible (ver README)`;
+  document.getElementById('dataSourceLabel').textContent = live ? 'Datos en vivo · GA4 Data API' : 'Datos simulados · /api/dashboard no disponible';
 }
 
 document.querySelectorAll('.switcher button').forEach(btn => {
@@ -740,12 +446,6 @@ document.querySelectorAll('.switcher button').forEach(btn => {
     currentProduct = btn.dataset.product;
     render();
   });
-});
-
-document.getElementById('compareToggle').addEventListener('click', function(){
-  compareEnabled = !compareEnabled;
-  this.classList.toggle('on', compareEnabled);
-  render();
 });
 
 render();
