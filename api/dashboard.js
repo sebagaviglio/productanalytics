@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
   eventSet.add(cfg.acquisition.kyc.start);
   eventSet.add(cfg.acquisition.kyc.complete);
   eventSet.add('first_open');
-  cfg.monetizationFunnel.forEach((step) => eventSet.add(step.event));
+  cfg.funnels.forEach((funnel) => funnel.steps.forEach((step) => eventSet.add(step.event)));
 
   const [activeUsersR, eventsR, engagementR, channelsR] = await Promise.all([
     safeCall('activeUsers', () => getActiveUsersSeries(propertyId, ranges)),
