@@ -122,21 +122,22 @@
   .legend{ display:flex; gap:16px; font-size:12px; color:var(--text-1); }
   .legend span{ display:flex; align-items:center; gap:6px; }
   .legend i{ width:9px; height:9px; border-radius:2px; display:inline-block; }
-  .funnel-row{ display:flex; align-items:stretch; gap:14px; }
-  .funnel-step{ flex:1; display:flex; flex-direction:column; gap:8px; }
-  .funnel-bar-wrap{ height:150px; display:flex; align-items:flex-end; background:rgba(255,255,255,0.03); border-radius:10px; position:relative; overflow:hidden; padding:10px 10px 0; gap:10px;}
-  .bar-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:6px; }
-  .bar-value{ font-size:10.5px; color:var(--text-1); font-weight:600; white-space:nowrap; }
-  .bar{ width:100%; border-radius:6px 6px 0 0; transition: height .6s ease; }
-  .bar.current{ background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 55%, transparent)); }
-  .bar.previous{ background: var(--glass-strong); border:1px solid var(--border-strong); border-bottom:none; }
-  .funnel-step-name{ font-size:12.5px; color:var(--text-0); font-weight:500; margin-top:2px; display:flex; align-items:center; }
-  .funnel-conv{ font-size:11px; color:var(--text-2); margin-top:2px; }
-  .funnel-conv-entry{ font-style:italic; }
-  .funnel-conv-value{ color:var(--text-0); font-weight:600; }
-  .funnel-conv-delta{ font-weight:600; margin-left:4px; }
-  .funnel-conv-delta.up{ color:var(--accent); }
-  .funnel-conv-delta.down{ color:var(--danger); }
+
+  .embudo{ display:flex; flex-direction:column; align-items:center; gap:3px; max-width: 560px; margin: 0 auto; }
+  .embudo-seg{ width:100%; min-height:84px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border-strong); transition: clip-path .5s ease; }
+  .embudo-seg-content{ text-align:center; padding: 10px 12px; }
+  .embudo-seg-name{ font-size:12.5px; font-weight:600; color:var(--text-0); display:flex; align-items:center; justify-content:center; gap:4px; }
+  .embudo-seg-value{ font-size:24px; font-weight:800; letter-spacing:-.5px; color:var(--text-0); margin-top:2px; }
+  .embudo-seg-sub{ font-size:10.5px; color:var(--text-1); margin-top:2px; }
+  .embudo-seg-sub .delta.up{ color:var(--accent); font-weight:600; }
+  .embudo-seg-sub .delta.down{ color:var(--danger); font-weight:600; }
+
+  .embudo-connector{ display:flex; align-items:center; justify-content:center; gap:8px; padding:4px 0; }
+  .embudo-connector-line{ width:1px; height:14px; background: var(--border-strong); }
+  .embudo-conv-pill{ font-size:11px; background: var(--glass-strong); border:1px solid var(--border-strong); border-radius: var(--radius-pill); padding:4px 12px; display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .embudo-conv-pill b{ color: var(--text-0); }
+  .embudo-conv-pill .delta.up{ color:var(--accent); font-weight:600; }
+  .embudo-conv-pill .delta.down{ color:var(--danger); font-weight:600; }
 
   .unavailable-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; margin-top:16px; }
   .unavailable-card{ background: repeating-linear-gradient(135deg, var(--glass), var(--glass) 10px, rgba(255,255,255,0.015) 10px, rgba(255,255,255,0.015) 20px); border:1px dashed var(--border-strong); border-radius: var(--radius-card); padding:20px 22px; }
@@ -551,10 +552,12 @@ async function render(forceRefresh){
     renderSparkSVG(document.getElementById('sparkStick'), stickSeries, '--tertiary', false);
   }
 
-  // ---- FUNNELS de conversión (uno o más por producto) ----
+  // ---- FUNNELS de conversión (uno o más por producto), como embudo ----
   const funnelsContainer = document.getElementById('funnelsContainer');
   funnelsContainer.innerHTML = '';
   const funnelBase = [100, 55, 30];
+  const MIN_SEG_WIDTH = 22; // % mínimo para que el último paso no desaparezca visualmente
+
   cfg.funnels.forEach((funnel, fIdx) => {
     const card = document.createElement('div');
     card.className = 'funnel-card';
@@ -562,58 +565,68 @@ async function render(forceRefresh){
       <div class="funnel-head">
         <div>
           <div class="funnel-title">${funnel.title} · ${cfg.label}</div>
-          <div class="funnel-note">Usuarios que alcanzan cada paso, período actual vs. anterior</div>
-        </div>
-        <div class="legend">
-          <span><i style="background:var(--accent)"></i>Período actual</span>
-          <span><i style="background:var(--glass-strong); border:1px solid var(--border-strong)"></i>Período anterior</span>
+          <div class="funnel-note">El ancho de cada tramo es proporcional al volumen del primer paso · período actual</div>
         </div>
       </div>
-      <div class="funnel-row" id="funnelRow-${fIdx}"></div>
+      <div class="embudo" id="embudo-${fIdx}"></div>
     `;
     funnelsContainer.appendChild(card);
 
-    const funnelRow = card.querySelector(`#funnelRow-${fIdx}`);
-    let prevStepCur = null, prevStepPrev = null;
-    funnel.steps.forEach((step, i) => {
+    // Primero traemos los datos de todos los pasos para conocer el máximo (paso 0)
+    const stepsData = funnel.steps.map((step, i) => {
       const data = getSeries(live, step.event, cfg.baseActive*30*(funnelBase[i]/100), 40+fIdx*10+i);
-      const curUsers = sum(data.current), prevUsers = sum(data.previous);
-      const maxVal = Math.max(curUsers, prevUsers, 1) * 1.15;
-      const curH = Math.max(6, (curUsers/maxVal)*120), prevH = Math.max(6, (prevUsers/maxVal)*120);
+      return { step, curUsers: sum(data.current), prevUsers: sum(data.previous) };
+    });
+    const maxUsers = Math.max(...stepsData.map(s => s.curUsers), 1);
 
-      // Conversión vs. el paso anterior DEL MISMO funnel (no aplica al primer paso)
-      let conversionHTML = '<div class="funnel-conv funnel-conv-entry">Punto de entrada</div>';
+    const embudoEl = card.querySelector(`#embudo-${fIdx}`);
+    let prevStepCur = null, prevStepPrev = null;
+
+    stepsData.forEach(({ step, curUsers, prevUsers }, i) => {
+      // Conector con la conversión respecto al paso anterior
       if(i > 0){
         const convCur = prevStepCur ? curUsers/prevStepCur : 0;
         const convPrev = prevStepPrev ? prevUsers/prevStepPrev : 0;
         const convDelta = calcDelta(convCur, convPrev);
         const dirClass = convDelta >= 0 ? 'up' : 'down';
-        conversionHTML = `
-          <div class="funnel-conv">
-            <span class="funnel-conv-value">${formatPct(convCur)}</span> conversión
-            <span class="funnel-conv-delta ${dirClass}">${convDelta>=0?'+':''}${convDelta.toFixed(1)}%</span>
-          </div>
+        const connector = document.createElement('div');
+        connector.className = 'embudo-connector';
+        connector.innerHTML = `
+          <div class="embudo-connector-line"></div>
+          <div class="embudo-conv-pill"><b>${formatPct(convCur)}</b> conversión <span class="delta ${dirClass}">${convDelta>=0?'+':''}${convDelta.toFixed(1)}% vs. anterior</span></div>
+          <div class="embudo-connector-line"></div>
         `;
+        embudoEl.appendChild(connector);
       }
       prevStepCur = curUsers; prevStepPrev = prevUsers;
 
-      const div = document.createElement('div');
-      div.className = 'funnel-step';
-      div.innerHTML = `
-        <div class="funnel-bar-wrap">
-          <div class="bar-col">
-            <div class="bar-value">${formatNumber(prevUsers)}</div>
-            <div class="bar previous" style="height:${prevH}px"></div>
-          </div>
-          <div class="bar-col">
-            <div class="bar-value">${formatNumber(curUsers)}</div>
-            <div class="bar current" style="height:${curH}px"></div>
-          </div>
+      // Ancho del tramo (top) proporcional al volumen; el bottom se angosta
+      // hacia el ancho del PRÓXIMO paso (o un poco menos si es el último).
+      const topPct = Math.max(MIN_SEG_WIDTH, (curUsers/maxUsers)*100);
+      const nextUsers = stepsData[i+1] ? stepsData[i+1].curUsers : curUsers*0.85;
+      const bottomPct = Math.max(MIN_SEG_WIDTH*0.85, (nextUsers/maxUsers)*100);
+      const topInset = (100-topPct)/2, bottomInset = (100-bottomPct)/2;
+      const clipPath = `polygon(${topInset}% 0%, ${100-topInset}% 0%, ${100-bottomInset}% 100%, ${bottomInset}% 100%)`;
+
+      // Color: se va apagando a medida que se angosta el embudo
+      const intensity = 34 - i*9;
+      const bg = `color-mix(in srgb, var(--accent) ${Math.max(intensity,10)}%, var(--bg-1))`;
+
+      const deltaVsAnterior = calcDelta(curUsers, prevUsers);
+      const dirClass2 = deltaVsAnterior >= 0 ? 'up' : 'down';
+
+      const seg = document.createElement('div');
+      seg.className = 'embudo-seg';
+      seg.style.clipPath = clipPath;
+      seg.style.background = bg;
+      seg.innerHTML = `
+        <div class="embudo-seg-content">
+          <div class="embudo-seg-name">${step.name}${tooltipIcon('tipStep'+fIdx+'_'+i, 'Evento: <code>'+step.event+'</code>')}</div>
+          <div class="embudo-seg-value">${formatNumber(curUsers)}</div>
+          <div class="embudo-seg-sub">vs. anterior: ${formatNumber(prevUsers)} <span class="delta ${dirClass2}">(${deltaVsAnterior>=0?'+':''}${deltaVsAnterior.toFixed(1)}%)</span></div>
         </div>
-        <div class="funnel-step-name">${step.name}${tooltipIcon('tipStep'+fIdx+'_'+i, 'Evento: <code>'+step.event+'</code>')}</div>
-        ${conversionHTML}
       `;
-      funnelRow.appendChild(div);
+      embudoEl.appendChild(seg);
     });
   });
 
