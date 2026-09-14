@@ -131,6 +131,12 @@
   .bar.current{ background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 55%, transparent)); }
   .bar.previous{ background: var(--glass-strong); border:1px solid var(--border-strong); border-bottom:none; }
   .funnel-step-name{ font-size:12.5px; color:var(--text-0); font-weight:500; margin-top:2px; display:flex; align-items:center; }
+  .funnel-conv{ font-size:11px; color:var(--text-2); margin-top:2px; }
+  .funnel-conv-entry{ font-style:italic; }
+  .funnel-conv-value{ color:var(--text-0); font-weight:600; }
+  .funnel-conv-delta{ font-weight:600; margin-left:4px; }
+  .funnel-conv-delta.up{ color:var(--accent); }
+  .funnel-conv-delta.down{ color:var(--danger); }
 
   .unavailable-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; margin-top:16px; }
   .unavailable-card{ background: repeating-linear-gradient(135deg, var(--glass), var(--glass) 10px, rgba(255,255,255,0.015) 10px, rgba(255,255,255,0.015) 20px); border:1px dashed var(--border-strong); border-radius: var(--radius-card); padding:20px 22px; }
@@ -568,11 +574,29 @@ async function render(forceRefresh){
     funnelsContainer.appendChild(card);
 
     const funnelRow = card.querySelector(`#funnelRow-${fIdx}`);
+    let prevStepCur = null, prevStepPrev = null;
     funnel.steps.forEach((step, i) => {
       const data = getSeries(live, step.event, cfg.baseActive*30*(funnelBase[i]/100), 40+fIdx*10+i);
       const curUsers = sum(data.current), prevUsers = sum(data.previous);
       const maxVal = Math.max(curUsers, prevUsers, 1) * 1.15;
       const curH = Math.max(6, (curUsers/maxVal)*120), prevH = Math.max(6, (prevUsers/maxVal)*120);
+
+      // Conversión vs. el paso anterior DEL MISMO funnel (no aplica al primer paso)
+      let conversionHTML = '<div class="funnel-conv funnel-conv-entry">Punto de entrada</div>';
+      if(i > 0){
+        const convCur = prevStepCur ? curUsers/prevStepCur : 0;
+        const convPrev = prevStepPrev ? prevUsers/prevStepPrev : 0;
+        const convDelta = calcDelta(convCur, convPrev);
+        const dirClass = convDelta >= 0 ? 'up' : 'down';
+        conversionHTML = `
+          <div class="funnel-conv">
+            <span class="funnel-conv-value">${formatPct(convCur)}</span> conversión
+            <span class="funnel-conv-delta ${dirClass}">${convDelta>=0?'+':''}${convDelta.toFixed(1)}%</span>
+          </div>
+        `;
+      }
+      prevStepCur = curUsers; prevStepPrev = prevUsers;
+
       const div = document.createElement('div');
       div.className = 'funnel-step';
       div.innerHTML = `
@@ -587,6 +611,7 @@ async function render(forceRefresh){
           </div>
         </div>
         <div class="funnel-step-name">${step.name}${tooltipIcon('tipStep'+fIdx+'_'+i, 'Evento: <code>'+step.event+'</code>')}</div>
+        ${conversionHTML}
       `;
       funnelRow.appendChild(div);
     });
